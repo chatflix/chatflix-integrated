@@ -20,6 +20,8 @@ export function sidebar() {
   sidebarInner.classList.add("sidebar-inner");
 
   sidebarInner.innerHTML = `
+
+
       <div class="sidebar-list">
         <p class="title"><a href="/tv-list.html" menu-close class="sidebar-link" onclick='getMovieList("language=en-US", "Trending")'>Trending Now</a></p>
         <p class="title"><a href="/tv-list.html" menu-close class="sidebar-link" onclick='getMovieList("language=en-US", "Popular")'>Top Rated</a></p>

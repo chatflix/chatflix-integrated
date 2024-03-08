@@ -974,8 +974,22 @@ body {
   }
 }
 
+
+/* Logo in header: use icon-only version on mobile */
 .logo-new {
-  width: 140px !important;
+  width: 120px !important;
+}
+
+.logo-small {
+  width: 40px !important;
+}
+
+@media (min-width: 575px) {
+  .logo-small { display: none !important }
+}
+
+@media (max-width: 575px) {
+  .logo-new { display: none !important }
 }
 
 /* Temporary hidden elements */
@@ -986,3 +1000,15 @@ body {
 .hide {
   display: none !important;
 }
+
+
+/* Main Menu */
+.top-nav {
+  color: #CCC;
+  font-weight: bold;
+}
+
+.top-nav.active {
+  color: #fff !important;
+}
+

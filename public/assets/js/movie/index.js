@@ -216,8 +216,8 @@ const createMovieList = function ({ results: movieList }, title) {
   pageContent.appendChild(movieListElem);
 };
 
-search();
-window.AI = AI
+
+
 $("document").ready(function () {
   /*
   ui.start('#firebaseui-auth-container', {
@@ -226,5 +226,16 @@ $("document").ready(function () {
     ],
     // Other config options...
   }); */
+
+
+  const searchBox = document.querySelector("[search-box]");
+  const searchTogglers = document.querySelectorAll("[search-toggler]");
+
+  addEventOnElements(searchTogglers, "click", function () {
+    searchBox.classList.toggle("active");
+  });
+
     console.log("DOM ready, jQuery is available to call on $")
+    search();
+
 })

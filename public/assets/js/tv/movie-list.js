@@ -7,6 +7,7 @@ import { sidebar } from "./sidebar.js";
 import { createMovieCard } from "./movie-card.js";
 
 import { search } from "./search.js";
+import '../jquery.js';
 
 // collection of genre name & url parameters from local storage
 const genreName = window.localStorage.getItem("genreName");
@@ -83,4 +84,26 @@ fetchDataFromServer(
   }
 );
 
-search();
+
+$("document").ready(function () {
+  /*
+  ui.start('#firebaseui-auth-container', {
+    signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
+    ],
+    // Other config options...
+  }); */
+
+
+  const searchBox = document.querySelector("[search-box]");
+  const searchTogglers = document.querySelectorAll("[search-toggler]");
+
+  addEventOnElements(searchTogglers, "click", function () {
+    searchBox.classList.toggle("active");
+  });
+
+    console.log("DOM ready, jQuery is available to call on $")
+    search();
+    // window.AI = AI
+
+})
