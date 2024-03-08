@@ -5,8 +5,8 @@ return `
   <img class="logo-small" src="/assets/images/chatflix-logo-square.png" />
 </a>
 
-<a class="top-nav${section == "Movies" ? " active" : ""}" href="/index.html">🎞️ Movies</a>
-<a class="top-nav${section == "TV" ? " active" : ""}" href="/tv.html">&#x1f4fa; TV</a>
+<a class="top-nav${section == "Movies" ? " active" : ""}" href="/index.html">🎞️ Movies</span></a>
+<a class="top-nav${section == "TV" ? " active" : ""}" href="/tv.html">&#x1f4fa; TV</span></a>
 
 <div class="search-box" search-box>
   <div class="search-wrapper" search-wrapper>
