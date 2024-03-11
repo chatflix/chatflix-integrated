@@ -4,7 +4,7 @@ const { parse } = require('node-html-parser');
 const mustacheExpress = require('mustache-express');
 
 const app = express();
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 // Serve static files from the "public" directory
 app.use(express.static('public'));
 // Register '.mustache' extension with The Mustache Express
@@ -13,6 +13,55 @@ app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
 // Set the directory where the templates are located
 app.set('views', __dirname + '/views');
+
+app.get('/movies', (req, res) => {
+  
+  // You can now use movieId and movieTitle to fetch data and render a template
+  res.render('homepage', { // Assuming you have a 'movie.mustache' template
+      page_title: "Movies",
+      page_module: "movie/index",
+  });
+});
+
+app.get('/movies', (req, res) => {
+  
+  // You can now use movieId and movieTitle to fetch data and render a template
+  res.render('homepage', { // Assuming you have a 'movie.mustache' template
+      page_title: "Movies",
+      page_module: "movie/index",
+  });
+});
+
+app.get('/movies/list', (req, res) => {
+  
+  res.render('movie-list', { 
+      page_title: req.query.genre+" Movies",
+      with_genres: req.query.with_genres,
+      genre_name: req.query.genre,
+      page_module: "movie/movie-list"
+  });
+});
+
+app.get('/tv/list', (req, res) => {
+  
+  // Note that the tv list page is the same as the movie list page, just with a different JS module... 
+  res.render('movie-list', { 
+    page_title: req.query.genre+" Series",
+    with_genres: req.query.with_genres,
+    genre_name: req.query.genre,
+    page_module: "tv/movie-list"
+});
+});
+
+
+app.get('/tv', (req, res) => {
+  
+  // You can now use movieId and movieTitle to fetch data and render a template
+  res.render('homepage', { // Assuming you have a 'movie.mustache' template
+      page_title: "TV",
+      page_module: "tv/index",
+  });
+});
 
 app.get('/movie/:movieId/:movieTitle', (req, res) => {
   const { movieId, movieTitle } = req.params;
@@ -43,13 +92,10 @@ app.get('/tv/:movieId/:movieTitle', (req, res) => {
 //   });
 // });
 
-
-app.use('/proxy', (req, res) => {
-  const urlToProxy = req.query.url;
-  if (!urlToProxy) {
-    return res.status(400).send('URL is required');
-  }
-
+//this function loads a url that we wish to embed in one of our pages, but which contains ads or other malware...
+//by retrieving the content, injecting some basic ad blocking and anti-XSS code into the page, and then serving it to the client 
+//we get rid of most of the troublesome ads... and we gain full control over the contents because its same origin :)
+const proxyWithAdBlock = (urlToProxy, res) => {
   request(urlToProxy, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       const root = parse(body);
@@ -71,7 +117,9 @@ app.use('/proxy', (req, res) => {
                 // You can redirect the URL here if needed
               });
             });
-            console.log('Proxying ${urlToProxy}');
+
+            window.console = window.parent.console;
+
           })
 
         });
@@ -79,7 +127,10 @@ app.use('/proxy', (req, res) => {
 
       const scriptEl = parse(`<script>${scriptContent}</script>`);
       head.appendChild(scriptEl);
-      res.send(root.toString());
+
+      // remove the script tag that came with the page, and replace with a reference to a modified version of the script on chatflix server...
+      // the modified version has been altered to remove malware affecting devtools
+      res.send(root.toString()) //.replace(`<script type="text/javascript" src="assets/embed/min/all.js?v=65530633"></script>`, `<script src='/assets/js/external/vidsrc_all.js'></script>`));
     } else {
       console.error('Error proxying:', error);
       res.status(500).send(`
@@ -127,6 +178,31 @@ app.use('/proxy', (req, res) => {
       `);
     }
   });
+
+}
+app.use('/player/:type/:tmdbId', (req, res) => {
+  const urlToProxy = req.query.url;
+  if (urlToProxy) {
+    //deprecated but permitted... prefer passing parameterized player
+    console.log("[debug] proxying directly specified url: " + urlToProxy);
+    return proxyWithAdBlock(urlToProxy, res);
+  } else {
+    const {type, tmdbId} = req.params
+    const playerId = req.query.player || 'classic'
+    const streams= require('./public/data/providers/hosts.json')
+    const stream = streams.find(stream => stream.id === playerId)
+
+    console.log ("[debug] creating player: " + {type, tmdbId, playerId, stream})
+
+    if (!stream) 
+      return res.status(404).send('Player not found for id: ' + playerId);
+    else {
+        const playerUrl = stream[type + '_url'].replace('{id}', tmdbId);
+        console.log("[debug] upstream player url: " + playerUrl);
+        console.log("[debug] player will be downloaded and sanitized en route to client...")
+        return proxyWithAdBlock(playerUrl, res);
+      }
+  }
 });
 
 app.listen(port, () => {

@@ -9,7 +9,6 @@ import { api_key, imageBaseURL, fetchDataFromServer } from "../api.js";
 import { createMovieCard } from "./movie-card.js";
 import { search } from "./search.js";
 import {db, auth, analytics, ui} from '../firebase.js'
-
 const pageContent = document.querySelector("[page-content]");
 
 sidebar();
@@ -227,13 +226,13 @@ $("document").ready(function () {
     // Other config options...
   }); */
 
+    
+    const searchBox = document.querySelector("[search-box]");
+    const searchTogglers = document.querySelectorAll("[search-toggler]");
 
-  const searchBox = document.querySelector("[search-box]");
-  const searchTogglers = document.querySelectorAll("[search-toggler]");
-
-  addEventOnElements(searchTogglers, "click", function () {
-    searchBox.classList.toggle("active");
-  });
+    addEventOnElements(searchTogglers, "click", function () {
+      searchBox.classList.toggle("active");
+    });
 
     console.log("DOM ready, jQuery is available to call on $")
     search();

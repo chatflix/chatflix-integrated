@@ -10,9 +10,10 @@ import { search } from "./search.js";
 import '../jquery.js';
 
 // collection of genre name & url parameters from local storage
-const genreName = window.localStorage.getItem("genreName");
-const urlParam = window.localStorage.getItem("urlParam");
-
+//const genreName = window.localStorage.getItem("genreName");
+//const urlParam = window.localStorage.getItem("urlParam");
+const genreName = window.GENRE_NAME
+const urlParam = window.URL_PARAM
 const pageContent = document.querySelector("[page-content]");
 const getApiRoute=(genre, query, page) => {
   //special cases

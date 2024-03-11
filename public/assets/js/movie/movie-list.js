@@ -10,8 +10,9 @@ import { search } from "./search.js";
 import '../jquery.js';
 
 // collection of genre name & url parameters from local storage
-const genreName = window.localStorage.getItem("genreName");
-const urlParam = window.localStorage.getItem("urlParam");
+const genreName = window.GENRE_NAME
+const urlParam = window.URL_PARAM
+
 
 const pageContent = document.querySelector("[page-content]");
 const getApiRoute=(genre, query, page) => {
@@ -20,9 +21,7 @@ const getApiRoute=(genre, query, page) => {
     return `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&sort_by=release_date.desc&page=${page}&language=en-US`
   } else if (genre == "Popular") {
     return `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc&include_adult=false&page=${page}&${query}`
-  } else if (genre == "Now Playing") {
-    return `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&sort_by=popularity.desc&page=${page}&language=en-US`
-  } else {
+  }  else {
     return `https://api.themoviedb.org/3/discover/movie?api_key=${api_key}&sort_by=popularity.desc=en-US&page=${page}&${query}`
   }
 }

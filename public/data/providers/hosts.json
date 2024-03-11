@@ -1,0 +1,33 @@
+[
+   {
+        "id": "classic",
+        "name": "vidsrc.to",
+        "tv_url": "https://vidsrc.to/embed/tv/{id}",
+        "movie_url": "https://vidsrc.to/embed/movie/{id}",
+        "hd": true, 
+        "captions": false,
+        "ads": false,
+        "description": "[Original Player] Server #1 - HD, Fast Loading, Ad-Free. Stream only, no captions."
+    },
+   {
+        "id": "beta",
+        "name": "vidsrc.me",
+        "tv_url": "https://vidsrc.me/embed/tv?tmdb={id}",
+        "movie_url": "https://vidsrc.me/embed/movie?tmdb={id}",
+        "hd": true, 
+        "captions": false,
+        "ads": true,
+        "description": "[New Beta Player] Server #2 - HD, with captions in 36 Languages!"
+    },
+    {
+        "id": "alt",
+        "name": "backup",
+        "movie_url": "https://multiembed.mov/directstream.php?video_id={id}&tmdb=1",
+        "tv_url": "https://multiembed.mov/directstream.php?video_id={id}}&tmdb=1&s=1&e=1",
+        "description": "[Alternate] Server #3 - Different provider, good quality, best captions. Occasional ads",
+        "hd": true, 
+        "captions": false,
+        "ads": true
+    }
+
+]

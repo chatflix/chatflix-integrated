@@ -232,5 +232,5 @@ $("document").ready(function () {
     console.log("DOM ready, jQuery is available to call on $")
     search();
     // window.AI = AI
-
+    //loadFlixxiFromExternalURL("https://chatflix.xyz?viewmode=widget&persona=flixxi")
 })

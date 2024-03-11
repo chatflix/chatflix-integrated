@@ -23,45 +23,47 @@ return `
       src="/assets/images/search.png"
       alt="search"
       class="leading-icon"
-      width="24"
-      height="24"
+      width="22"
+      height="22"
     />
   </div>
 
-  <button class="search-btn" search-toggler menu-close>
+  <button  class="search-btn" search-toggler menu-close>
     <img
       src="/assets//images/close.png"
-      width="24"
-      height="24"
-      alt="open search box"
-    />
+      width="22"
+      height="22"
+      />
   </button>
 </div>
 
 <button class="search-btn" search-toggler menu-close>
   <img
     src="/assets/images/search.png"
-    width="24"
-    height="24"
-    alt="open search box"
+    width="22"
+    height="22"
+    alt="Search for ${section == "Movies" ? "movies" : "TV shows"}"
+    title="Search for ${section == "Movies" ? "movies" : "TV shows"}"
   />
 </button>
 
 <button class="menu-btn" menu-btn menu-toggler>
   <img
     src="/assets/images/menu.png"
-    alt="open menu"
+    alt="Browse Categories"
+    title="Browse Categories"
     class="menu"
-    width="24"
-    height="24"
+    width="22"
+    height="22"
   />
   <img
     src="/assets/images/menu-close.png"
-    alt="close menu"
+    alt="Close Menu"
     class="close"
-    width="24"
-    height="24"
+    width="22"
+    height="22"
   />
+
 </button>
 `
 }   

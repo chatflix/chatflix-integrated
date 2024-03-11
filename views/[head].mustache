@@ -1,0 +1,33 @@
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="title" content="Chatflix | {{page_title}}" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg" />
+    <!-- Prerequisite -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Title -->
+    <title>Chatflix | {{page_title}}</title>
+    <!-- StyleSheet : CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <!-- Utility Library -->
+    <script src="/assets/js/global.js" defer></script>
+    
+    <!-- Database -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+
+    <!-- Menu Bootstrapper -->
+    <script type="module">
+      import {header} from "/assets/js/header.js"
+      document.querySelector("header").innerHTML = header("{{page_title}}")
+    </script>
+
+    <!-- Page-specific JS Module -->
+    <script src="/assets/js/{{page_module}}.js" type="module" defer></script>

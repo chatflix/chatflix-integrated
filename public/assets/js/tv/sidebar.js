@@ -23,20 +23,10 @@ export function sidebar() {
 
 
       <div class="sidebar-list">
-        <p class="title"><a href="/tv-list.html" menu-close class="sidebar-link" onclick='getMovieList("language=en-US", "Trending")'>Trending Now</a></p>
-        <p class="title"><a href="/tv-list.html" menu-close class="sidebar-link" onclick='getMovieList("language=en-US", "Popular")'>Top Rated</a></p>
+        <p class="title"><a href="/tv/list?with_genres=null&genre=Trending" menu-close class="sidebar-link" onclick='getMovieList("language=en-US", "Trending")'>Trending Now</a></p>
+        <p class="title"><a href="/tv/list?with_genres=null&genre=Trending" menu-close class="sidebar-link" onclick='getMovieList("language=en-US", "Popular")'>Top Rated</a></p>
         <p>&nbsp;</p>
         <p class="title">Genres...</p>
-
-      </div>
-      <div class="sidebar-list">
-        <p class="title">Language</p>
-
-        <a href="/tv-list.html" menu-close class="sidebar-link" onclick='getMovieList("language=en-US", "English")'>English</a>
-
-        <a href="/tv-list.html" menu-close class="sidebar-link" onclick='getMovieList("language=es", "Spanish")'>Spanish</a>
-        
-        <a href="/tv-list.html" menu-close class="sidebar-link" onclick='getMovieList("language=fr", "French")'>French</a>
 
       </div>
       <div class="sidebar-footer">
@@ -58,7 +48,7 @@ export function sidebar() {
     for (const [genreId, genreName] of Object.entries(genreList)) {
       const link = document.createElement("a");
       link.classList.add("sidebar-link");
-      link.setAttribute("href", "/tv-list.html");
+      link.setAttribute("href", `/tv/list?with_genres=${genreId}&genre=${genreName}`);
       link.setAttribute("menu-close", "");
       link.setAttribute(
         "onclick",
