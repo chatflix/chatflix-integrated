@@ -6,20 +6,12 @@ import { createMovieCard } from "./movie-card.js";
 import { search } from "./search.js";
 import '../jquery.js';
 import { shareButton } from "../share.js";
+import { getPlayerUrl, streamPicker } from "../multi-player.js";
 //const movieId = window.localStorage.getItem("movieId");
 const movieId = window.MOVIE_ID; //injected by express router
 const movieTitleSlug= window.MOVIE_TITLE;
 const playerProxyUrl='/proxy';
 const pageContent = document.querySelector("[page-content]");
-const getPlayerUrl = (tmdbId, type="movie", player="classic") => {
-  switch (player) {
-      case "classic":
-          return `/player/${type}/${tmdbId}?player=classic` //== legacy minus ads
-      case "beta": 
-          return type == "movie" ? `https://blackvid.space/embed?tmdb=${tmdbId}` : `https://blackvid.space/embed?tmdb=${tmdbId}&season=1&episode=1`
-
-  }
-}
 
 sidebar();
 
@@ -121,20 +113,8 @@ fetchDataFromServer(
                     <ul class="detail-list">
                     <div class="list-item">
                         <p class="list-name">Streams</p>
-                        <div>
-                          <select id="player-selector" style="width: 100%">
-                              <option value="classic">1) Chatflix Player (1080p, NO Ads, Fast Loading &amp; Great Selection)</option>
-                              <option value="beta">2) Alternate Player (360p - 2160p, Subtitles in 30 languages, Ads)</option>
-                          </select>
-                       
-                       
-                          <p>
-                          <small>By default, all movies and shows play in the Chatflix Player, in partnership with vidsrc... However if you need subtitles or captions, please use the alternate player for now until we have captions working in our ad free player.</small>      
-
-                
-                        </p>
+                        ${streamPicker()}
                         </div>
-                    </div>
                     <div class="list-item">
                         <p class="list-name">Genres</p>
                         <p>${getGenres(genres)}</p>
@@ -151,15 +131,6 @@ fetchDataFromServer(
                         <p>${getDirectors(crew)}</p>
                     </div>
 
-                    <div class="list-item hide">
-                      <p class="list-name">About Rating</p>
-                      <p>G = "Family Entertainment, no sex, no swearing, no violence. Basically, Bambi or some cartoons"<br />
-                         PG = "Parental Guidance... parents are trusted to use good judgment and determine if their kids should watch the movie"<br />
-                         PG-13 = "Basically the same as above, except that parents are Strongly Cautioned that it may not be appropriate for kids who have not yet had a Bar Mitzvah lmao"<br />
-                         R = "R-rated... Gratuitous violence and nearly unlimited swearing are on tap here, but sexual content is highly restricted: some ridiculous simulations of sexual activity and a few glimpses of the female breast are all that's permitted, to ensure young minds stay pure"<br />
-                         NC-17 = "Adults only, AKA X rated... Movies that refuse to bow to the demands of these retards who want to censor the film often receive an NC-17 rating, as do many foreign films that (in their original countries) nobody finds shocking in the least. You'll find theaters in big, liberal cities playing such flicks... but in the Heartland, NC-17 is just too much for them bible thumpers."
-                      </p>
-                      </div>
                     </ul>
                 </div>
 

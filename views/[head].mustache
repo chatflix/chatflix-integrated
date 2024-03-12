@@ -26,7 +26,7 @@
     <!-- Menu Bootstrapper -->
     <script type="module">
       import {header} from "/assets/js/header.js"
-      document.querySelector("header").innerHTML = header("{{page_title}}")
+      document.querySelector("header").innerHTML = header(location.href.indexOf("tv") <0 ? "Movies": "TV")
     </script>
 
     <!-- Page-specific JS Module -->

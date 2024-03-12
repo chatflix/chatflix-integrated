@@ -6,16 +6,7 @@ import { createMovieCard } from "./movie-card.js";
 import { search } from "./search.js";
 import '../jquery.js';
 import { shareButton } from '../share.js';
-const getPlayerUrl = (tmdbId, type="movie", player="classic") => {
-  switch (player) {
-      case "classic":
-          return `/player/${type}/${tmdbId}?player=classic` //== legacy minus ads
-      case "beta": 
-          return type == "movie" ? `https://blackvid.space/embed?tmdb=${tmdbId}` : `https://blackvid.space/embed?tmdb=${tmdbId}&season=1&episode=1`
-
-  }
-}
-
+import { getPlayerUrl, streamPicker } from "../multi-player.js";
 //const movieId = window.localStorage.getItem("movieId");
 const movieId = window.MOVIE_ID; //injected by express router
 const movieTitleSlug= window.MOVIE_TITLE; //injected by express router.
@@ -117,20 +108,9 @@ fetchDataFromServer(
                 </div>
                 <div class="list-item">
                 <p class="list-name">Streams</p>
-                <div>
-                  <select id="player-selector" style="width: 100%">
-                      <option value="classic">1) Chatflix Player (1080p, NO Ads, Fast Loading &amp; Great Selection)</option>
-                      <option value="beta">2) Alternate Player (360p - 2160p, Subtitles in 30 languages, Ads)</option>
-                  </select>
-               
-               
-                  <p>
-                  <small>By default, all movies and shows will be played in the default Chatflix Player with no ads and lightning fast speeds. If you need subtitles (in 33 languages) the alternate player is for you, however it has a few ads...</small>      
 
-        
-                </p>
-                </div>
-            </div>
+                ${streamPicker()}
+              </div>
 
                 <div class="title-wrapper hide">
                     <h3 class="title-large">Trailer and Clips</h3>
@@ -155,9 +135,9 @@ fetchDataFromServer(
     } */
 
     pageContent.appendChild(movieDetail);
-    shareButton(`${name} | Now Streaming on Chatflix`, 
-        `Watch ${name} for free on Chatflix! Chatflix has over 100,000 movies and TV episodes available for streaming in HD or casting to your TV, anywhere in the world, with no ads. Quite simply, Chatflix is the best streaming platform on this planet and the only streaming platform you need` 
-      , `https://chatflix.org/movie/${movieId}/${movieTitleSlug}?ref=nativeShareButton`,
+    shareButton(`${name}`, 
+        `Stream every season of ${name} on Chatflix, the best streaming platform on this planet. 
+        With over 450,000 HD movies and TV episodes, Chatflix has something for everyone.`,
       '.share-button');
       
       $(".copy-link").on("click", function (event) {
