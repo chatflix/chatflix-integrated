@@ -1084,6 +1084,7 @@ button[search-toggler] {
   z-index: 10; /* Ensures it stays on top of other content */
 }
 
+
 .widget-container {
   display: none; /* Hidden by default */
   position: fixed;
@@ -1109,4 +1110,38 @@ button[search-toggler] {
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+
+/* Info - Help Triggers and Display */
+/* Overlay */
+.info-overlay {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
+
+
+
+}
+
+/* Modal content */
+.info-modal {
+  background-color: #fefefe;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index:800000; /* always on top */
+  border: 1px solid #888;
+  width: 500px; /* Could be more or less, depending on screen size */
+  max-width: 90%;
+  color: white;
+  background-color: #444; /* 70% grey background */
 }

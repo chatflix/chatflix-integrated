@@ -14,7 +14,7 @@ app.set('view engine', 'mustache');
 // Set the directory where the templates are located
 app.set('views', __dirname + '/views');
 
-app.get('/movies', (req, res) => {
+app.get('/', (req, res) => {
   
   // You can now use movieId and movieTitle to fetch data and render a template
   res.render('homepage', { // Assuming you have a 'movie.mustache' template
@@ -31,6 +31,8 @@ app.get('/movies', (req, res) => {
       page_module: "movie/index",
   });
 });
+
+
 
 app.get('/movies/list', (req, res) => {
   

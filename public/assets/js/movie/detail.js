@@ -39,7 +39,23 @@ const getDirectors = function (crewList) {
   for (const { name } of directors) directorList.push(name);
   return directorList.join(", ");
 };
+ const getSimplifiedMovieInfo = (rawMovieData) => {
+  return {
+    title: rawMovieData.title,
+    genres: rawMovieData.genres.map(genre => genre.name),
+    plot_summary: rawMovieData.overview,
+    cast: rawMovieData.casts.cast.slice(0, 10).map(castMember => castMember.name), // assuming we limit to top 10 cast members for brevity
+    director: rawMovieData.casts.crew.find(crewMember => crewMember.job === "Director")?.name || "Unknown",
+    original_language: rawMovieData.original_language,
+    release_date: rawMovieData.release_date,
+    runtime: rawMovieData.runtime,
+    average_score: rawMovieData.vote_average,
+    vote_count: rawMovieData.vote_count,
+    poster_path: `https://image.tmdb.org/t/p/original${rawMovieData.poster_path}`,
+    backdrop_path: `https://image.tmdb.org/t/p/original${rawMovieData.backdrop_path}`
 
+  }
+ }
 // returns only trailers and teasers as array
 const filterVideos = function (videoList) {
   return videoList.filter(
@@ -66,8 +82,11 @@ fetchDataFromServer(
       casts: { cast, crew },
       videos: { results: videos },
     } = movie;
+    //console.log(JSON.stringify(getSimplifiedMovieInfo(movie), null, 2));
+    //alert("hamster")
 
-    document.title = `${title} - Chatflix`;
+    
+    //document.title = `${title} - Chatflix`;
 
     const movieDetail = document.createElement("div");
     movieDetail.classList.add("movie-detail");
