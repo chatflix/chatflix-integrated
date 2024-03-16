@@ -1,8 +1,8 @@
 const header = (section) => {
 return `
 <a href="${section == "Movies" ? "/movies" : "/tv"}" >
-  <img class="logo-new" src="/assets/images/chatflix-logo-new.png" />
-  <img class="logo-small" src="/assets/images/chatflix-logo-square.png" />
+  <img class="logo-new" src="/assets/images/chatflix-web-full.png" />
+  <img class="logo-small" src="/assets/images/chatflix-logo-small.png" />
 </a>
 
 <a class="top-nav${section == "Movies" ? " active" : ""}" href="/movies">🎞️ Movies</span></a>
