@@ -170,17 +170,30 @@ const configureInfoButtons = function() {
   $('.info-button').click(function(e) {
       e.preventDefault();
       var infoText = $(this).data('info-text');
-      $('.info-modal').html(infoText);
-      $('.info-overlay').fadeIn();
-  });
-
-  $('.info-overlay').click(function(e) {
-      if ($(e.target).closest('.info-modal').length === 0) {
-          $('.info-overlay').fadeOut();
-      }
+      showModal(infoText, true)
   });
 }
 
-$("document").on("ready", () => {
-  configureInfoButtons()
-})
+const showModal = function(modalText, clickToDismiss=true) {
+  //remove click handler on overlay
+  $('.info-overlay').off('click');
+
+  //add click handler to overlay if clickToDismiss
+  if (clickToDismiss) {
+    $('.info-overlay').click(function(e) {
+      if ($(e.target).closest('.info-modal').length === 0) {
+          $('.info-overlay').fadeOut();
+      }
+    });
+  }
+
+  //populate the modal container
+  $('.info-modal').html(modalText);
+
+  //show the modal
+  $('.info-overlay').fadeIn();
+}
+
+// $("document").on("ready", () => {
+//   configureInfoButtons()
+// })

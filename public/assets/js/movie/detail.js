@@ -244,9 +244,10 @@ $("document").ready(function () {
     searchBox.classList.toggle("active");
   });
 
-  //this is actually pretty simple, because the client no longer touches these dirty embeds, the server takes care of constructing the request and cleaning the scripts that come back
-
     console.log("DOM ready, jQuery is available to call on $")
     search();
+
+    //paywall
+    enforceMembershipForContentPages(); //assumes membership is loaded and can be referenced
 
 })

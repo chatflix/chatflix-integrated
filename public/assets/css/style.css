@@ -1138,7 +1138,7 @@ button[search-toggler] {
 /* Modal content */
 .info-modal {
   background-color: #fefefe;
-  padding: 20px;
+  padding: 10px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1151,4 +1151,9 @@ button[search-toggler] {
   overflow-y: auto;
   color: white;
   background-color: #444; /* 70% grey background */
+}
+
+/* if we prevent the body from growing past 1200px, we no longer have to deal with an exposed sidebar, and life gets easier */
+.center-body {
+  margin:auto; max-width:1440px !important
 }

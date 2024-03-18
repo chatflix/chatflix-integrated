@@ -39,10 +39,10 @@ function resultMessage(message) {
         if (name) return params[name]
         return params;
       }
-      
+      let baseURL = window.location.href.indexOf('localhost') > 0 ? 'http://localhost:5000' : 'https://chatflix.org'
       $(document).ready(function() {
         $.ajax({
-          url: 'http://localhost:5000/api/membership/products',
+          url: baseURL+'/api/membership/products',
           type: 'GET',
           dataType: 'json',
           success: function(products) {
@@ -124,8 +124,9 @@ function resultMessage(message) {
                       // (3) Successful transaction -> Show confirmation or thank you message
                       // Or go to another URL:  actions.redirect('thank_you.html');
                       console.log(JSON.stringify(orderData, null, 2))
-                      actions.redirect('http://localhost:5000/activate.html?code=' + orderData.chatflix_membership.code)
-                      
+                      //actions.redirect('http://localhost:5000/activate.html?code=' + orderData.chatflix_membership.code)
+                      //keep it inside the frame
+                      window.location.href= baseURL+'/activate.html?code=' + orderData.chatflix_membership.code
                       
                     }
                   } catch (error) {
