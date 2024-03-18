@@ -1,0 +1,31 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  .container {
+    padding-top: 2rem;
+  }
+  .card {
+    background-color: #1f1f1f;
+    border-color: #333;
+    margin: 20px
+  }
+  .btn-primary {
+    background-color: #20005c;
+    border-color: #ffffff;
+  }
+  .top_part {
+    text-align:center;
+    margin:20px;
+  }
+#paypal-button-container {
+  background-color:rgb(242, 223, 223); padding: 20px
+}
+
+/* Simple styling for the product info display */
+.product-info {
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

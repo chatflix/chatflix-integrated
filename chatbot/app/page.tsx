@@ -88,7 +88,7 @@ export default function Chat() {
         <div className="border-gray-200sm:mx-0 mx-5 mt-5 max-w-screen-md rounded-md border sm:w-full">
           <div className="flex flex-col space-y-4 p-7 sm:p-10">
             <h1 className="text-lg font-semibold text-black">
-              Hi, I'm Flixxy!
+              Hi, I'm Flixy, your personal Streaming Concierge!
             </h1>
             <p>How can I help you today? You can say things like:</p>
           </div>

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "all": "cd payment && npm run start && cd .. && npm run dev && cd chatbot && pnpm run dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "PORT=5000 node index.js",
     "prod": "sudo pm2 start 'PORT=5000 node index.js' --name 'chatflix-content-proxy'"
