@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/membership.js"></script>
+</head>
+<body>
+<script>
+         const getQueryParams = (name) => {
+            const params = {};
+            window.location.search.slice(1).split('&').forEach(param => {
+              const [key, value] = param.split('=');
+              params[key] = value;
+            });
+            if (name) return params[name]
+            return params;
+          }
+          
+          //short and sweet... we've been given an activation code after successful payment
+          //we can now activate the device, and redirect to the home page
+          $(document).ready(function() { 
+            const activationCode = getQueryParams("code");
+            activateDevice(activationCode, (data) => {
+              parent.location.href="/"
+            })
+          })
+
+</script>
+</body>
