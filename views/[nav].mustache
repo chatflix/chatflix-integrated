@@ -1,0 +1,51 @@
+<nav class="bg-background py-4 px-6 flex items-center justify-between">
+  <div class="flex items-center">
+    <a href="#" class="text-white text-xl font-bold">Your Logo</a>
+    <div class="hidden md:flex ml-10">
+      <a href="#" class="text-on-surface-variant hover:text-on-background px-3 py-2">Movies</a>
+      <a href="#" class="text-on-surface-variant hover:text-on-background px-3 py-2">TV</a>
+      <a href="#" class="text-on-surface-variant hover:text-on-background px-3 py-2">Search</a>
+      <a href="#" class="text-on-surface-variant hover:text-on-background px-3 py-2">Account</a>
+    </div>
+  </div>
+  <div class="md:hidden">
+    <button id="mobile-menu-button" class="text-on-surface-variant hover:text-on-background focus:outline-none">
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+  <div class="hidden md:block">
+    <button id="hamburger-menu-button" class="text-on-surface-variant hover:text-on-background focus:outline-none">
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu" class="hidden md:hidden absolute top-16 left-0 w-full bg-background py-2">
+  <a href="#" class="block text-on-surface-variant hover:text-on-background px-4 py-2">Movies</a>
+  <a href="#" class="block text-on-surface-variant hover:text-on-background px-4 py-2">TV</a>
+  <a href="#" class="block text-on-surface-variant hover:text-on-background px-4 py-2">Search</a>
+  <a href="#" class="block text-on-surface-variant hover:text-on-background px-4 py-2">Account</a>
+</div>
+
+<div id="sb" class="hidden fixed top-0 right-0 h-full w-64 bg-surface transition-transform duration-300 ease-in-out transform translate-x-full">
+  <h1>Gerbils Fuck Hamstrers</h1>
+</div>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerMenuButton = document.getElementById('hamburger-menu-button');
+  const sidebar = document.getElementById('sb');
+
+  mobileMenuButton.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+
+  hamburgerMenuButton.addEventListener('click', () => {
+    sb.classList.toggle('translate-x-full');
+  });
+</script>

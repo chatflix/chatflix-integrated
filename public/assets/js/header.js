@@ -2,11 +2,11 @@ const header = (section) => {
 return `
 <a href="${section == "Movies" ? "/movies" : "/tv"}" >
   <img class="logo-new" src="/assets/images/chatflix-web-full.png" />
-  <img class="logo-small" src="/assets/images/chatflix-logo-small.png" />
+  <img class="logo-small" src="/assets/images/chatflix-web-small.png" />
 </a>
 
-<a class="top-nav${section == "Movies" ? " active" : ""}" href="/movies">🎞️ Movies</span></a>
-<a class="top-nav${section == "TV" ? " active" : ""}" href="/tv">&#x1f4fa; TV</span></a>
+<a class="top-nav${section == "Movies" ? " active" : ""}" href="/movies">Movies</span></a>
+<a class="top-nav${section == "TV" ? " active" : ""}" href="/tv">TV Shows</span></a>
 
 <div class="search-box" search-box>
   <div class="search-wrapper" search-wrapper>

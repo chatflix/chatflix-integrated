@@ -70,25 +70,7 @@ streaming link`
 const load = (context) => {
     $("#flixy-window iframe").attr("src", `${flixi_base_url}?context=${context}`)
 }
-const configureInfoButtons = function() {
-    $('body').append('<div class="info-overlay"><div class="info-modal"></div></div>');
-
-    $('.info-button').click(function(e) {
-        e.preventDefault();
-        var infoText = $(this).data('info-text');
-        $('.info-modal').html(infoText);
-        $('.info-overlay').fadeIn();
-    });
-
-    $('.info-overlay').click(function(e) {
-        if ($(e.target).closest('.info-modal').length === 0) {
-            $('.info-overlay').fadeOut();
-        }
-    });
-}
 $("document").ready(() => {
-    configureInfoButtons()
-
 
     $("#flixy-trigger").on("click", (e) => {
         

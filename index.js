@@ -2,8 +2,11 @@ const express = require('express');
 const request = require('request');
 const { parse } = require('node-html-parser');
 const mustacheExpress = require('mustache-express');
+const membership = require('./membership/membership');
+const cors = require('cors')
 
 const app = express();
+app.use(cors())
 const port = process.env.PORT || 5000;
 // Serve static files from the "public" directory
 app.use(express.static('public'));
@@ -206,6 +209,8 @@ app.use('/player/:type/:tmdbId', (req, res) => {
       }
   }
 });
+
+membership.httpApi(app, '/api/membership');
 
 app.listen(port, () => {
   console.log(`Proxy server listening at http://localhost:${port}`);

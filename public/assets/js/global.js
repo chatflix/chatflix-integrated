@@ -162,3 +162,25 @@ function loadFlixxiFromExternalURL(url="https://chatflix.xyz?viewmode=widget&per
       }
   });
 }
+
+
+const configureInfoButtons = function() {
+  $('body').append('<div class="info-overlay"><div class="info-modal"></div></div>');
+
+  $('.info-button').click(function(e) {
+      e.preventDefault();
+      var infoText = $(this).data('info-text');
+      $('.info-modal').html(infoText);
+      $('.info-overlay').fadeIn();
+  });
+
+  $('.info-overlay').click(function(e) {
+      if ($(e.target).closest('.info-modal').length === 0) {
+          $('.info-overlay').fadeOut();
+      }
+  });
+}
+
+$("document").on("ready", () => {
+  configureInfoButtons()
+})

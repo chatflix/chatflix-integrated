@@ -104,7 +104,7 @@ input {
 }
 
 button {
-  text-align: left;
+  text-align: right;
   cursor: pointer;
 }
 
@@ -335,7 +335,7 @@ body {
   padding-block: 24px;
   padding-inline: 16px;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   gap: 8px;
 }
@@ -878,7 +878,8 @@ body {
   .search-box {
     all: unset;
     display: block;
-    width: 360px;
+    width: 50%;
+    margin-left: auto;
   }
 
   .banner {
@@ -1008,15 +1009,20 @@ body {
   color: #CCC;
   text-align:center !important;
   font-weight:400;
-  font-size: 16px;
+  font-size: 14px;
+  width: 85px;
+  flex-grow: 0;
+  /* flex-shrink: 0; */
 }
 
 .top-nav.active {
   color: #fff !important;
   background-color: var(--banner-background);
-  border-radius: var(--radius-8);
+  /* border-radius: var(--radius-8); */
   padding: 10px;
-  font-weight: 700;
+  /* font-weight: 700; */
+  /* text-decoration: underline; */
+  border-bottom: solid 1px white;
 }
 
 
@@ -1118,12 +1124,11 @@ button[search-toggler] {
 .info-overlay {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 700000; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
   background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
 
 
@@ -1141,7 +1146,9 @@ button[search-toggler] {
   z-index:800000; /* always on top */
   border: 1px solid #888;
   width: 500px; /* Could be more or less, depending on screen size */
-  max-width: 90%;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
   color: white;
   background-color: #444; /* 70% grey background */
 }
