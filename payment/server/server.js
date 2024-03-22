@@ -6,11 +6,12 @@ import path from "path";
 //allow cors from anywhere using node.js express cors
 import cors from "cors";
 
-const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PORT = 8888 } = process.env;
+const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PORT = 8888, MEMBERSHIP_API_URL, CHATFLIX_BASE_URL } = process.env;
 //real men don't use sandbox const base = "https://api-m.sandbox.paypal.com";
 const base = "https://api-m.paypal.com"
 const app = express();
 app.use(cors());
+app.set('view engine', 'ejs');
 
 // host static files
 app.use(express.static("client"));
@@ -136,9 +137,8 @@ app.post("/api/orders", async (req, res) => {
   } catch (error) {
     console.error("Failed to create order:", error);
     res.status(500).json({ error: "Failed to create order." });
-  }
+  } 
 });
-
 app.post("/api/orders/:orderID/capture", async (req, res) => {
   try {
     const { orderID } = req.params;
@@ -184,9 +184,18 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
 //checkout flow - step 1: pick a product, click buy now. there is no cart, no login, no recurring billing
 //process.env.MEMBERSHIP_API_URL will always point to [production chatflix url]/api/membership
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("client/products.html"));
+  res.render("products.ejs", {
+    CHATFLIX_BASE_URL: process.env.CHATFLIX_BASE_URL
+  })
+  //res.sendFile(path.resolve("client/products.html"));
 });
 
+app.get('/checkout', (req, res) => {
+  res.render("checkout.ejs", {
+    CHATFLIX_BASE_URL: process.env.CHATFLIX_BASE_URL
+  })
+  //res.sendFile(path.resolve("client/checkout.html"));
+})
 //checkout flow - step 2: checkout page confirming product details, and with paypal payment buttons
 
 

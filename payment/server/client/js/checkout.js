@@ -39,7 +39,7 @@ function resultMessage(message) {
         if (name) return params[name]
         return params;
       }
-      let baseURL = window.location.href.indexOf('localhost') > 0 ? 'http://localhost:5000' : 'https://chatflix.org'
+      let baseURL = window.CHATFLIX_BASE_URL
       $(document).ready(function() {
         $.ajax({
           url: baseURL+'/api/membership/products',

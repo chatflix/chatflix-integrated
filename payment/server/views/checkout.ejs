@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="app.css" />
+<link rel="stylesheet" href="/css/app.css" />
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@
     <main>
 
       <div class="px-4 py-2 my-4 text-center">
-        <img class="d-block mx-auto mb-4" src="chatflix-web-small.png" alt="" width="72" height="57">
+        <img class="d-block mx-auto mb-4" src="/img/chatflix-web-small.png" alt="" width="72" height="57">
         <h3>Selected Package</h3>
         <div id="products-container" class="mb-4">
           <!-- Membership packages will be listed here -->
@@ -41,6 +41,9 @@
     <p id="result-message"></p>
     <!-- Replace the "test" client-id value with your client-id -->
     <script src="https://www.paypal.com/sdk/js?client-id=Ae7Farw3H3fsUr_nGQMMalYT1rkZb12rdBgyeM0YPlrBKO_BuI6Gh3pJznR5nwA5cdw-QnARkikD3fWD&components=buttons&enable-funding=paylater,venmo,card" data-sdk-integration-source="integrationbuilder_sc"></script>
-    <script src="checkout.js"></script>
+    <script>
+      window.CHATFLIX_BASE_URL="<%= CHATFLIX_BASE_URL %>"
+    </script>
+    <script src="/js/checkout.js"></script>
   </body>
 </html>

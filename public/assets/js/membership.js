@@ -69,7 +69,18 @@ function decryptCode(encryptedCode) {
     }
   }
 
-
+function getMembershipDetails(callback) {
+  const deviceActivationStatus=getDeviceActivationStatus();
+  if (deviceActivationStatus.status == "valid") {
+    const encryptedCode=localStorage.getItem('membershipCode');
+    $.get("/api/membership/get-code-info/" + encryptedCode, (data) => {
+      console.log("getMembershipDetails", JSON.stringify(data, null, 2))
+      callback(data)
+    })
+  } else {
+    callback(null)
+  }
+}
   function getMembershipStatus() {
     const activationStatus = getDeviceActivationStatus()
     if (activationStatus.status == "none") {

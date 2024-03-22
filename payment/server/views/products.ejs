@@ -13,7 +13,7 @@
 
   <main>
     <div class="px-4 py-2 my-4 text-center">
-      <img class="d-block mx-auto mb-4" src="chatflix-web-small.png" alt="" width="72" height="57">
+      <img class="d-block mx-auto mb-4" src="/img/chatflix-web-small.png" alt="" width="72" height="57">
       <h1 class="display-5 fw-bold text-body-emphasis">Activation Required</h1>
       <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Your free trial of Chatflix has expired, and you need to activate your device to continue.</p>
@@ -49,7 +49,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-const CHATFLIX_APP_URL = location.href.indexOf('localhost') > 0 ? 'http://localhost:5000' : 'https://chatflix.org'
+const CHATFLIX_APP_URL = '<%= CHATFLIX_BASE_URL %>'
 const getQueryParams = (name) => {
   const params = {};
   window.location.search.slice(1).split('&').forEach(param => {
@@ -99,7 +99,7 @@ $(document).ready(function() {
               <li>Family Sharing - Up to ${product.max_activations} devices</li>
 
             </ul>
-            <a href="checkout.html?product_id=${product.id}" class="w-100 btn btn-lg btn-primary">Buy Now</a>
+            <a href="/checkout?product_id=${product.id}" class="w-100 btn btn-lg btn-primary">Buy Now</a>
           </div>
         </div>
       </div>`

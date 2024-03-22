@@ -18,7 +18,8 @@
     <div style="display:none" class="px-4 py-2 my-4 text-center" id="activate-success">
       <img class="d-block mx-auto mb-4" src="/assets/images/chatflix-web-small.png" alt="" width="72" height="57">
       <h1 class="display-5 fw-bold text-body-emphasis">Activation Complete!</h1>
-      <div class="col-lg-6 mx-auto">
+      <div class="col-lg-6 mx-auto border-primary">
+        <p>Your membership code is: <b id="activation-code"></b><br />Keep this code in a save place, will need it to activate additional devices!</p>
         <p class="lead mb-4 activation-result"></p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <a target="_top" href="/" class="see-packages btn btn-primary btn-lg px-4 gap-3">Start Streaming</a>
@@ -58,6 +59,7 @@
             activateDevice(activationCode, (status, data) => {
               if (status =="success") {
                 $("#activate-success .activation-result").text(data)
+                $("#activation-code").text(activationCode)
                 $("#activate-success").show()
               } else {
                 $("#activate-failure .activation-result").text(data)
