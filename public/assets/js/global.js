@@ -1,6 +1,14 @@
 "use strict";
 
 // Add event on multiple elements
+window.MOCK_PLAYER=window.localStorage.getItem("MOCK_PLAYER") //for when u need to debug the player page without the hassle of the script that breaks the debugger :)
+const setMockPlayer = () => {
+  window.localStorage.setItem("MOCK_PLAYER", "true");
+}
+
+const clearMockPlayer = () => {
+  window.localStorage.removeItem("MOCK_PLAYER");
+}
 
 const addEventOnElements = function (elements, eventType, callback) {
   for (const elem of elements) elem.addEventListener(eventType, callback);

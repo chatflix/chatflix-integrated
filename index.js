@@ -86,6 +86,22 @@ app.get('/tv/:movieId/:movieTitle', (req, res) => {
   });
 });
 
+
+
+app.get('/account', (req, res) => {
+  
+  // You can now use movieId and movieTitle to fetch data and render a template
+  res.sendFile('/public/account.html');
+});
+
+app.get('/activate', (req, res) => {
+  
+  // You can now use movieId and movieTitle to fetch data and render a template
+  res.sendFile('/public/activate.html');
+});
+
+
+
 // app.get('/tv/:seriesId/:seriesTitle/:season/:episode', (req, res) => {
 //   const { seriesId, seriesTitle, season, episode } = req.params;
 //   // Use the parameters to fetch details for the specific episode

@@ -5,6 +5,9 @@ const players = [{id: "classic", desc: "Server #1 - HD, No Ads, Original Chatfli
 //alt = hacked streams from vidsrc
 //beta = ???
 const getPlayerUrl = (tmdbId, type="movie", player="classic") => {
+    if (window.MOCK_PLAYER!==null) return '';
+
+
     switch (player) {
   
         case "classic":  

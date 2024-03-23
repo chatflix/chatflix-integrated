@@ -61,7 +61,7 @@ function decryptCode(encryptedCode) {
     const now = new Date();
   
     if (expiry > now) {
-      return { status: 'valid', expiryDate: expiry };
+      return { status: 'valid', expiryDate: expiry, code: encryptedCode };
     } else {
       // Remove expired code from localStorage
       localStorage.removeItem('membershipCode');
@@ -75,7 +75,9 @@ function getMembershipDetails(callback) {
     const encryptedCode=localStorage.getItem('membershipCode');
     $.get("/api/membership/get-code-info/" + encryptedCode, (data) => {
       console.log("getMembershipDetails", JSON.stringify(data, null, 2))
-      callback(data)
+      deviceActivationStatus.details = data
+      callback(deviceActivationStatus)
+      //callback(data)
     })
   } else {
     callback(null)
@@ -101,7 +103,7 @@ function getMembershipDetails(callback) {
     if (membershipStatus.freeTrialEligible) {
       requestCreateFreeTrial((status, message) => {
         //show a welcome message, then reload
-           configureInfoButtons(); showModal("<div style='text-align:center'><h2>Welcome To Chatflix!</h2><p>We have created a 24 hour free trial for you. Please wait 5 seconds while your device is being activated...</p></div>", false)
+           configureInfoButtons(); showModal("<div style='text-align:center'><h2>Welcome To Chatflix!</h2><p>We have granted you a 72 hour FREE TRIAL - 3 Whole Days of Unlimited Streaming! Please wait 5 seconds while your device is being activated...</p></div>", false)
 
            setTimeout(function() {
             window.location.reload();
