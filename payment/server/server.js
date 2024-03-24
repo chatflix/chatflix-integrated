@@ -183,10 +183,31 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
 
 //checkout flow - step 1: pick a product, click buy now. there is no cart, no login, no recurring billing
 //process.env.MEMBERSHIP_API_URL will always point to [production chatflix url]/api/membership
-app.get("/", (req, res) => {
-  res.render("products.ejs", {
-    CHATFLIX_BASE_URL: process.env.CHATFLIX_BASE_URL
+app.get("/paywall", (req, res) => {
+  res.render("activation-required.ejs", {
+    CHATFLIX_BASE_URL: process.env.CHATFLIX_BASE_URL,
+    IS_MEMBER: false
+
   })
+  //res.sendFile(path.resolve("client/products.html"));
+});
+
+app.get("/packages", (req, res) => {
+  //determine the referrer from the request header
+  const referrer = req.get("Referrer");
+  if (referrer && referrer.includes("interstitial") || req.query["chatflix"]=="1")  {
+    res.render("packages-chatflix.ejs", {
+      CHATFLIX_BASE_URL: process.env.CHATFLIX_BASE_URL,
+      IS_MEMBER: false
+      
+    })  
+  } else {
+    res.render("packages.ejs", {
+      CHATFLIX_BASE_URL: process.env.CHATFLIX_BASE_URL,
+      IS_MEMBER: false
+      
+    })
+  }
   //res.sendFile(path.resolve("client/products.html"));
 });
 
@@ -196,6 +217,15 @@ app.get('/checkout', (req, res) => {
   })
   //res.sendFile(path.resolve("client/checkout.html"));
 })
+
+
+app.get('/', (req, res) => {
+  res.render("flix-home.ejs", {
+    CHATFLIX_BASE_URL: process.env.CHATFLIX_BASE_URL
+  })
+  //res.sendFile(path.resolve("client/checkout.html"));
+})
+
 //checkout flow - step 2: checkout page confirming product details, and with paypal payment buttons
 
 

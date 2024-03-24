@@ -1,0 +1,25 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flixi Flix - Checkout</title>
+</head>
+<body>
+
+    <div style="text-align:center; padding-top:150px;">
+        <h2 style="font-size:24px; font-weight: 700; font-family:Arial, Helvetica, sans-serif">Please wait while you are redirected to the Membership Server</h2>
+        <script>
+            //get the referring page
+            var referrer = document.referrer;
+            console.log('referrer: ' + referrer);
+            if (!referrer.includes('chatflix')) {
+                window.location.href='/'
+            }
+            setTimeout(function() {
+                window.location.href = "/packages";
+            }, 3000);
+        </script>
+    </div>
+</body>
+</html>

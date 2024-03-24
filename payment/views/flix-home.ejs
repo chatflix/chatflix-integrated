@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flixi Flix - Entertainment Journalism and AI TV Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        .membership-card {
+            transition: transform 0.3s ease;
+        }
+        .membership-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <main>
+        <section class="text-center py-12 bg-gray-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <img src="/img/flixi-flix-hero.png" alt="Banner" class="mx-auto mb-6">
+            </div>
+        </section>
+
+        <section class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-center text-2xl font-bold text-gray-200 mb-6">Pricing &amp; Packages</h3>
+                <!-- Product list embedded from stripe (flix@flixi.org) -->
+                <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                <stripe-pricing-table pricing-table-id="prctbl_1OxkRs05nJfGRBF2OZD9ESjU"
+                publishable-key="pk_live_51Oxi1u05nJfGRBF2nHOnNSRm7bof6fFTU9dpYZuIrXRCquVMUaaplIfucphoqy7EJoxqyPd57AIXXqth9MndTCck00c7ggtfft">
+                </stripe-pricing-table>
+            </div>
+        </section>
+
+        <section class="bg-gray-800 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-2xl font-bold text-gray-200 mb-6">Features and Benefits</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-700 p-6 rounded-lg shadow-md">
+                        <h4 class="text-lg font-semibold mb-2 text-gray-200">Award-Winning Journalism by Top Film Critics</h4>
+                        <p class="text-gray-400">Unlock Premium Content on All FLIXNET(tm) Member Sites</p>
+                    </div>
+                    <div class="bg-gray-700 p-6 rounded-lg shadow-md">
+                        <h4 class="text-lg font-semibold mb-2 text-gray-200">Access Flixi, Your Entertainment Concierge</h4>
+                        <p class="text-gray-400">No Bullshit Billing - All Packages are unlimited for the duration and do not auto-renew</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-2xl font-bold text-gray-200 mb-6">New On Flixi Flix!</h3>
+                <p class="text-gray-400 mb-4">Members can now converse with "Flixi", your personal Entertainment Concierge. Flixi is a highly trained AI who knows more about movies and TV shows than any human on Earth... much more than a Chatbot, Flixi is capable of making decisions, using tools, and doing research in order to satisfy all your streaming needs.</p>
+            </div>
+        </section>
+
+        <section class="bg-gray-800 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-2xl font-bold text-gray-200 mb-6">Contact Us</h3>
+                <div class="space-y-2">
+                    <p><strong>General Inquiries:</strong> flix@flixi.org</p>
+                    <p><strong>Product Support:</strong> sam@flixi.org</p>
+                    <p><strong>Business Development:</strong> marvin@flixi.org</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-200 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <p>&copy; 2023 Flixi Flix. All rights reserved.</p>
+            <div class="space-x-4">
+                <a href="#" class="hover:text-gray-400">About</a>
+                <a href="#" class="hover:text-gray-400">Reviews</a>
+                <a href="#" class="hover:text-gray-400">Contact</a>
+                <a href="#" class="hover:text-gray-400">Terms & Conditions</a>
+                <a href="#" class="hover:text-gray-400">Privacy Policy</a>
+                <a href="#" class="hover:text-gray-400">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

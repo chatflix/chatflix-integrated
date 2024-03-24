@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flixi Flix - Dark Mode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        .membership-card {
+            transition: transform 0.3s ease;
+        }
+        .membership-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <main>
+        <section class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12"><img src="/img/flixi-ball.png" alt="Banner" class="mx-auto mb-6" style="width:150px"></div>
+                <h3 class="text-center text-2xl font-bold text-gray-200 mb-6">Become A Member!</h3>
+                <p>Flixi Flix is super excited to have you! All of our memberships give you access to our award winning reviews and entertainment journalism, plus you get to chat with Flixi!</p>
+                <!-- Product list embedded from stripe (flix@flixi.org) -->
+                <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                <stripe-pricing-table pricing-table-id="prctbl_1OxkRs05nJfGRBF2OZD9ESjU"
+                publishable-key="pk_live_51Oxi1u05nJfGRBF2nHOnNSRm7bof6fFTU9dpYZuIrXRCquVMUaaplIfucphoqy7EJoxqyPd57AIXXqth9MndTCck00c7ggtfft">
+                </stripe-pricing-table>
+            </div>
+        </section>
+
+        <section class="bg-gray-800 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-2xl font-bold text-gray-200 mb-6">Terms and Conditions</h3>
+                <p class="text-gray-400 mb-4">By clicking "Subscribe", you agree to our <a href="/terms-and-conditions" class="text-blue-500">Terms and Conditions</a>.</p>
+                <p>The FLIXNET group of companies has zero tolerance for fraud. You hereby accept and agree that the card you are using is your own, or you have been authorized to use it by the card holder.</p>
+                <p>If you have any concerns about your purchase, or if you are not satisfied with your purchase, you must contact us immediately: flix@flixi.org - we take customer satisfaction very seriously and we will ensure that you get what you paid for.</p>
+                <p>Refund Policy: No refunds will be given after 24 hours have passed. In the event of a technical issue that interferes with your access to the premium content during your membership period, please inform us at once so we can fix the problem and extend your membership at no charge</p>
+            </div>
+        </section>
+
+        <section class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-2xl font-bold text-gray-200 mb-6">New On Flixi Flix!</h3>
+                <p class="text-gray-400 mb-4">Members can now converse with "Flixi", your personal Entertainment Concierge. Flixi is a highly trained AI who knows more about movies and TV shows than any human on Earth... much more than a Chatbot, Flixi is capable of making decisions, using tools, and doing research in order to satisfy all your streaming needs.</p>
+            </div>
+        </section>
+
+        <section class="bg-gray-800 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-2xl font-bold text-gray-200 mb-6">Contact Us</h3>
+                <div class="space-y-2">
+                    <p><strong>General Inquiries:</strong> flix@flixi.org</p>
+                    <p><strong>Product Support:</strong> sam@flixi.org</p>
+                    <p><strong>Business Development:</strong> marvin@flixi.org</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-gray-200 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <p>&copy; 2023 Flixi Flix. All rights reserved.</p>
+            <div class="space-x-4">
+                <a href="#" class="hover:text-gray-400">About</a>
+                <a href="#" class="hover:text-gray-400">Reviews</a>
+                <a href="#" class="hover:text-gray-400">Contact</a>
+                <a href="#" class="hover:text-gray-400">Terms & Conditions</a>
+                <a href="#" class="hover:text-gray-400">Privacy Policy</a>
+                <a href="#" class="hover:text-gray-400">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

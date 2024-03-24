@@ -27,6 +27,15 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
+            
+            <div class="card" id="expiring-soon-warning-card">
+              <div class="card-body">
+                <h5 class="card-title text-danger">Expiring Soon</h5>
+                <p class="card-text">Your membership ends in less than 24 hours! Please extend or upgrade your Chatflix membership to continue streaming.</p>
+              </div>
+            </div>
+
+            <p><a class="btn btn-primary w-100" href="activation_hub.html" role="button">Upgrade Membership</a></p>
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Account Summary</h5>
@@ -48,7 +57,7 @@
             </div>
           </div>
         </div>
-        <div class="row mt-4">
+        <div class="row mt-4 show-if-valid">
           <div class="col-12">
             <div class="card">
               <div class="card-body">
@@ -64,6 +73,11 @@
               </div>
             </div>
           </div>
+        </div>
+
+
+        <div class="row mt-4 show-if-expired">
+          
         </div>
       </div>
       
@@ -87,16 +101,24 @@
           //we can now activate the device, and redirect to the home page
           $(document).ready(function() { 
             getMembershipDetails((data) => {
-              if (data == null)
-                location.href="https://payment.chatflix.org"
+              if (data == null || data.status == "expired")
+                location.href= 'activation_hub.html' 
               else 
               {
-              $("#expiryDate").html(data.details.expiry.split("T")[0])
-              $("#membershipStatus").html(data.status)
-              $("#activationCount").html(data.details.activationCount)
-              $("#maxDeviceActivations").html(data.details.maxDeviceActivations)
-              $("#activationCode").html(data.details.code)
+                $("#expiryDate").html(data.details.expiry.split("T")[0])
+                $("#membershipStatus").html(data.status)
+                $("#activationCount").html(data.details.activationCount)
+                $("#maxDeviceActivations").html(data.details.maxDeviceActivations)
+                $("#activationCode").html(data.details.code)
               }
+
+              if (isExpiringSoon(data)) {
+                $("#expiring-soon-warning-card").show()
+              } else {
+                $("#expiring-soon-warning-card").hide()
+              }
+
+              
             })
           })
           document.getElementById('copyIcon').addEventListener('click', function() {

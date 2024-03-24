@@ -1,5 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership Packages</title>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom Style for Dark Mode -->
+<link rel="stylesheet" href="/css/payment.css">
+</head>
+<body style="background-color:inherit">
+  <!-- jQuery and Bootstrap Bundle JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
-const PAYMENT_SERVER_URL = window.location.href.indexOf('localhost') > 0 ? 'http://localhost:8888' : 'https://flixi.org';
+  <main>
+    <div style="display:none; overflow:hidden" class="px-4 py-2 my-4 text-center" id="activate-success">
+      <img class="d-block mx-auto mb-4" src="/img/chatflix-web-small.png" alt="" width="72" height="57">
+      <h1 class="display-5 fw-bold text-body-emphasis">Transaction Complete!</h1>
+      <div class="col-lg-6 mx-auto" style="border:solid 1px #ccc; border-radius:20px; padding:15px;">
+        <p>Your membership code is:<br /><br />                  <code id="activation-code" class="text-break me-2"></code>
+
+      &nbsp;    
+      <a href="#" id="copyIcon" onclick="copyToClipboard()">
+          <i class="fas fa-copy" style="color: black;"></i>
+      </a>
+      
+      <br /><br />Keep this code in a save place, it is your key to our amazing content library and lets you and your family take advantage of your membership</p>
+        <p class="activation-result"></p>
+      </div>
+    </div>
+
+
+    
+  </main>
+<script>
+  function copyToClipboard() {
+    // Get the content of the div
+    var content = document.getElementById('activation-code').innerText;
+
+    // Create a temporary textarea element
+    var textarea = document.createElement('textarea');
+
+    // Set the value of the textarea to the content you want to copy
+    textarea.value = content;
+
+    // Append the textarea to the document body (needed for the copy command)
+    document.body.appendChild(textarea);
+
+    // Select the content of the textarea
+    textarea.select();
+
+    // Execute the "copy" command
+    try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        alert('Copy was ' + msg);
+    } catch (err) {
+        alert('Oops, unable to copy');
+    }
+
+    // Remove the temporary textarea
+    document.body.removeChild(textarea);
+}
+
+// Prevent the default action of the link
+document.getElementById('copyIcon').addEventListener('click', function(event) {
+    event.preventDefault();
+});
+const PAYMENT_SERVER_URL = 'https://chatflix.org'
 
 function decryptCode(encryptedCode) {
     const data = atob(encryptedCode);
@@ -112,7 +182,11 @@ function getMembershipDetails(callback) {
     }
   }
   function enforceMembershipForContentPages() {
-    const membershipStatus = getMembershipStatus();
+    	if (!window.PAYWALL) {
+		console.log("Skipping membership check because paywall is disabled")
+		return false
+	}
+	const membershipStatus = getMembershipStatus();
   
     if (membershipStatus.status === 'valid') {
       console.log("membership status: valid")
@@ -140,11 +214,37 @@ function getMembershipDetails(callback) {
       }
   }
 
-   //is expiring soon
-   const isExpiringSoon = (membershipDetailsResult) => {
-    const now = new Date();
-    const expiry = new Date(membershipDetailsResult.details.expiry);
-    const diff = expiry - now;
-    return diff < 86400 * 1000 * 3; // 24 hours in milliseconds
-  }
+</script>
+    <script>
+         const getQueryParams = (name) => {
+            const params = {};
+            window.location.search.slice(1).split('&').forEach(param => {
+              const [key, value] = param.split('=');
+              params[key] = value;
+            });
+            if (name) return params[name]
+            return params;
+          }
+          
+          //short and sweet... we've been given an activation code after successful payment
+          //we can now activate the device, and redirect to the home page
+          $(document).ready(function() { 
+            //this page gets called by stripe at the end of paymenet, we then generate a membership
+            //https://flixi.org/activate.html?product_id=5&price=9.95&duration=30
+            const {product_id, price, duration} = getQueryParams();
+            $.get(`https://chatflix.org/api/membership/create-paid-membership?product_id=${product_id}&payment_id=${Math.random().toString()}&payment_provider=stripe&is_crypto=0&payment_amount=${price}`, function(data) { 
+              //alert(JSON.stringify(data))
 
+              const activationCode = data.code
+
+              $("#activate-success .activation-result").html("Congratulations. Your transaction is complete and you code is below. PLEASE DO NOT LOSE THIS CODE, YOU NEED IT TO ACCESS PREMIUM CONTENT.<br /><br />To activate a device for membership, simply return to the site or click the 'My Account' button on any page in the bottom left hand corner. Thank you for shopping with us!")
+              $("#activation-code").text(activationCode)
+              $("#activate-success").show()
+
+
+            })
+           
+          })
+
+</script>
+</body>

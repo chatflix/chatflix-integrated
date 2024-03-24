@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flixi Flix - Dark Mode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <li class="mb-2"nk href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        .membership-card {
+            transition: transform 0.3s ease;
+        }
+        .membership-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <main>
+        <section class="py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12"><img src="/img/chatflix-web-small.png" alt="Banner" class="mx-auto mb-6" style="width:150px"></div>
+                <h3 class="text-center text-2xl font-bold text-gray-200 mb-6">Membership Packages</h3>
+                <p>All packages provide unlimited streaming of movies and TV shows on up to 10 devices. Your purchase is processed via FLIXNET and will show up on your statement as "FLIXIFLIX" - this is a one time payment. Memberships do not auto renew.</p>
+                <!-- Product list embedded from stripe (flix@flixi.org) -->
+                <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                <stripe-pricing-table pricing-table-id="prctbl_1OxkRs05nJfGRBF2OZD9ESjU"
+                publishable-key="pk_live_51Oxi1u05nJfGRBF2nHOnNSRm7bof6fFTU9dpYZuIrXRCquVMUaaplIfucphoqy7EJoxqyPd57AIXXqth9MndTCck00c7ggtfft">
+                </stripe-pricing-table>
+            </div>
+        </section>
+
+        <section class="bg-gray-800 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-2xl font-bold text-gray-200 mb-6">Terms and Conditions</h3>
+                <p class="mb-2">The FLIXNET group  has zero tolerance for fraud. You hereby accept and agree that the card you are using is your own, or you have been authorized to use it by the card holder.</p>
+                <p class="mb-2">If you have any concerns about your purchase, or if you are not satisfied with your purchase, you must contact us immediately: flix@flixi.org - we take customer satisfaction very seriously and we will ensure that you get what you paid for.</p>
+                <p class="mb-2">Refund Policy: No refunds will be given after 24 hours have passed. In the event of a technical issue that interferes with your access to the premium content during your membership period, please inform us at once so we can fix the problem and extend your membership at no charge</p>
+            </div>
+
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="text-2xl font-bold text-gray-200 mb-6">Membership FAQ</h3>
+                <ul>
+                    <li class="mb-2"><p>How do I activate my membership after purchasing?</p><p>Upon successful payment you will immediately receive a unique activation code that is programmed according to the package you selected. First, save this code somewhere secure. Then, simply hit the Account Settings button (bottom left) from anywhere on the platform, paste the code into the box, and click "Activate". This will activate that specific device and browser and let you consume content until the membership expires, at which time the device will automatically deactivate itself.</p></li>
+                    <li class="mb-2"><p>What is Family Sharing? How does it work?</p><p>Family sharing allows you to use your membership to activate up to 10 devices (depending on which plan you choose). You can keep track of your activations by pressing the My Account button which displays the information</p></li>
+                    <li class="mb-2"><p>I had to reinstall my browser and now it says I have no more activations remaining. What should I do?</p><p>Please contact us at support@flixi.org and tell us what type of browser (i.e. Chrome, Firefox, etc), device type (phone / tablet / computer), and OS (Android / iOS / windows / Mac) was involved. Our engineers can then deactivate the code and issue you a new one</p></li>
+                    <li class="mb-2"><p>Can I use this in Incognito mode?</p><p>NO you unfortunately cannot (at the moment). Incognito mode does not allow your browser to save data locally, and so your membership code will not be properly stored. </p></li>
+                    <li class="mb-2"><p>Can I use a VPN when streaming content on Chatflix?</p><p>Yes of course you can, note that many consumer VPNs often can be quite slow and laggy, and this can affect video quality. Note that a VPN is completely unnecessary when using this service, because there are no downloads or file sharing - to put it differently, Chatflix is completely safe to browse and stream content without the need for VPN or other security measures</p></li>
+
+                </ul>
+            </div>
+
+        </section>
+
+
+    </main>
+
+    <footer class="bg-gray-900 text-gray-200 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <p>&copy; 2024 FLIXNET Entertainment Solutions</p>
+        </div>
+    </footer>
+</body>
+</html>
