@@ -126,7 +126,7 @@ function getMembershipDetails(callback) {
             console.log("membership status: paywalled!")
               configureInfoButtons();showModal(`
               <div style="background-color:white">
-              <iframe src='${PAYMENT_SERVER_URL}' frameborder='0' style='width:100%; height: 80vh; margin: 0; border:0; padding: 0; overflow-y: scroll; scrollbar-width: thin;'></iframe>
+              <iframe src='/activation_hub.html' frameborder='0' style='width:100%; height: 80vh; margin: 0; border:0; padding: 0; overflow-y: scroll; scrollbar-width: thin;'></iframe>
               </div> `, false)
 
 
