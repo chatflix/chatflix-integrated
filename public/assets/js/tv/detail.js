@@ -76,7 +76,7 @@ fetchDataFromServer(
 
                   <iframe allowfullscreen referrerpolicy="origin" id="chatflix-multiplex-player" 
                   style="aspect-ratio: 16/9; width: 100%; padding:0; border:0; overflow:hidden" 
-                  src='${getPlayerUrl(movieId, "tv", "classic")}'></iframe>
+                  src='${window.STREAM_LOADER_URL}'></iframe>
 
                 <div class="meta-list" style="margin-top:10px">
                     <div class="meta-item">
@@ -106,7 +106,7 @@ fetchDataFromServer(
                     <p class="overview" style="margin-bottom:20px">${overview}</p>
 
                 </div>
-                <div class="list-item">
+                <div class="list-item" style="display:none">
                 <p class="list-name">Streams</p>
 
                 ${streamPicker()}

@@ -3,7 +3,8 @@ const request = require('request');
 const { parse } = require('node-html-parser');
 const mustacheExpress = require('mustache-express');
 const membership = require('./membership/membership');
-const cors = require('cors')
+const cors = require('cors');
+const { type } = require('requests');
 
 const app = express();
 app.use(cors())
@@ -122,6 +123,38 @@ const proxyWithAdBlock = (urlToProxy, res) => {
       const root = parse(body);
       const head = root.querySelector('head');
       const scriptContent = `
+      window.open = function() {
+        console.log('Blocked window.open call');
+        return null;
+      };
+      window.history = {
+        pushState: function() {
+          console.log('Blocked history.pushState call');
+          return null;
+        },
+        replaceState: function() {
+          console.log('Blocked history.replaceState call');
+          return null;
+        },
+        back: function() {
+          console.log('Blocked history.back call');
+          return null;
+        }
+      }
+      function restoreConsole() {
+        // Create an iframe for start a new console session
+        var iframe = document.createElement('iframe');
+        // Hide iframe
+        iframe.style.display = 'none';
+        // Inject iframe on body document
+        document.body.appendChild(iframe);
+        // Reassign the global variable console with the new console session of the iframe 
+        console = iframe.contentWindow.console;
+        window.console = console;
+        // Don't remove the iframe or console session will be closed
+      }
+      
+
         document.addEventListener('DOMContentLoaded', (event) => {
           setTimeout(() => {
             // Override window.open
@@ -139,8 +172,8 @@ const proxyWithAdBlock = (urlToProxy, res) => {
               });
             });
 
-            window.console = window.parent.console;
-
+            restoreConsole();
+            //setTimeout(restoreConsole, 10000)
           })
 
         });
@@ -201,6 +234,7 @@ const proxyWithAdBlock = (urlToProxy, res) => {
   });
 
 }
+
 app.use('/player/:type/:tmdbId', (req, res) => {
   const urlToProxy = req.query.url;
   if (urlToProxy) {
@@ -226,6 +260,16 @@ app.use('/player/:type/:tmdbId', (req, res) => {
   }
 });
 
+
+//this is the intelligent stream loader in /views/meta-player.mustache
+//given the content type and id, it will perform a health check on the .to and .xyz sources
+//preferentially load .to (because its a better stream and we control the adblock)
+//and fail over to .xyz (also ad free, but we pay for the stream and quality is less good)
+app.get('/stream/:type/:tmdbId', (req, res) => {
+  const {type, tmdbId} = req.params
+
+   res.render('meta-player', {type: type,  id: tmdbId})
+})
 membership.httpApi(app, '/api/membership');
 
 app.listen(port, () => {

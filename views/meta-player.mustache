@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Player Widget</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <script>
+        $(document).ready(function() {
+            //var urlParams = new URLSearchParams(window.location.search);
+            //var id = urlParams.get('id');
+            //var type = urlParams.get('type');
+            const id = '{{id}}'
+            const type='{{type}}'
+
+            var urlTo = 'https://vidsrc.to/embed/' + type + '/' + id;
+            var urlXyz = 'https://vidsrc.xyz/embed/' + type + '/' + id;
+            //var urlProxy = 'https://chatflix.org/player/' + type + '/' + id + '?url=' + urlTo;
+var urlProxy = '/player/' + type + '/' + id + '?url=' + urlTo;
+            $.get(urlTo)
+                .done(function() {
+                    //alert('status: 0 - .to found, loading thru proxy. '+urlProxy)
+                    window.location.href = urlProxy;
+                })
+                .fail(function() {
+                    $.get(urlXyz)
+                        .done(function() {
+                            //alert('status: 1 - 404 on .to, using direct .xyz url: '+ urlXyz)
+                            window.location.href = urlXyz;
+                        })
+                        .fail(function() {
+                            //alert('status: 2 - no sources found, using xyz url for 404 ui only: '+ urlXyz)
+                            window.location.href = urlXyz;
+                        });
+                });
+        });
+    </script>
+</body>
+</html>
