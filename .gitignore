@@ -4,3 +4,4 @@ datasets
 chatbot/.env
 payment/.env
 chatbot/.next
+gcloud.json
