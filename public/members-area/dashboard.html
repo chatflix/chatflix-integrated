@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatflix - Member Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Add custom styles here */
+        .trial {
+            color: red;
+            font-weight: bold;
+            display:none
+        }
+    </style>
+    <script type="module" src="js/db.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center mb-4">Member Dashboard</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="account" aria-selected="true">My Account</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="earnings-tab" data-bs-toggle="tab" data-bs-target="#earnings" type="button" role="tab" aria-controls="earnings" aria-selected="false">Affiliate Earnings</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="help-tab" data-bs-toggle="tab" data-bs-target="#help" type="button" role="tab" aria-controls="help" aria-selected="false">Help and FAQ</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="dashboardTabsContent">
+                    <div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Username: samrahimi420@gmail.com</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Membership Status: PREMIUM</h6>
+                                <p class="card-text trial">Your free trial will expire in less than 72 hours! Don't miss a second of unlimited entertainment with one of our affordable membership packages.</p>
+                                <a class="trial" href="packages.html" class="btn btn-primary">Upgrade Now</a>
+                            </div>
+                        </div>
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Premium Membership Details</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li id="memberSince" class="list-group-item">Member Since: 2024-04-07</li>
+                                    <li id="package" class="list-group-item">Package: Monthly</li>
+                                    <li id="expires" class="list-group-item">Expires: Never</li>
+                                    <li id="renews" class="list-group-item">Renews On: 2024-04-07</li>
+                                </ul>
+
+                                <div class="text-center">
+                                    <a class="btn btn-primary" href="packages.html">Change Plan</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+           
+
+  
+                    <div class="tab-pane fade" id="earnings" role="tabpanel" aria-labelledby="earnings-tab">
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Affiliate Earnings</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                                <h6 class="card-subtitle mb-2 text-muted">Referral Information</h6>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Your Referral Code: SAM420</li>
+                                                    <li class="list-group-item">Referral Link - Main Page:<br><a href="https://chatflix.org/?ref=SAMRAHIMI420" target="_blank">https://chatflix.org/?ref=SAM420</a></li>
+                                                    <li class="list-group-item">Referral Link - Signup:<br><a href="https://members.chatflix.org/signup.html?ref=SAMRAHIMI420" target="_blank">https://members.chatflix.org/signup.html?ref=SAM420</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                                <h6 class="card-subtitle mb-2 text-muted">Referral Stats (All Time)</h6>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Clicks: 12</li>
+                                                    <li class="list-group-item">Signups: 0</li>
+                                                    <li class="list-group-item">Sales: 0</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                                <h6 class="card-subtitle mb-2 text-muted">Commission Details</h6>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Your Commission Rate: 10% initial, 10% residual for life of customer</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                                <h6 class="card-subtitle mb-2 text-muted">Earnings</h6>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Since Last Withdrawal: $0.00</li>
+                                                    <li class="list-group-item">Lifetime Earnings: $0.00</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <a class="btn btn-primary" href="mailto:affiliates@chatflix.org">Request Withdrawal</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="tab-pane fade" id="help" role="tabpanel" aria-labelledby="help-tab">
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Help and FAQ</h5>
+                                <div class="accordion" id="faqAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                How do I upgrade my membership?
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                To upgrade your membership, go to the "My Account" tab and click on the "Upgrade Now" button. Choose the package that best suits your needs and follow the prompts to complete the upgrade process.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                How do I cancel my membership?
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                To cancel your membership, please contact our support team at support@chatflix.org. They will assist you with the cancellation process and any refund requests, if applicable.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingThree">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                How does the affiliate program work?
+                                            </button>
+                                        </h2>
+                                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                                            <div class="accordion-body">
+                                                Our affiliate program allows you to earn money by referring friends and family to Chatflix. When someone signs up using your unique referral code, you'll earn a commission on their membership fees. You can find your referral code in the "Affiliate Earnings" tab of your dashboard.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <p>Need help? Contact support at <a href="mailto:support@chatflix.org">support@chatflix.org</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/affiliate.js"></script>
+    <script>
+  function isLoggedIn() {
+    // Example: Check for a token in local storage
+    return localStorage.getItem('userId') !== null;
+  }
+
+  function getLoggedInUser() {
+    return JSON.parse(localStorage.getItem('user'))
+  }
+
+  function getAffiliateSummary() {
+    return JSON.parse(localStorage.getItem('affiliate_info'))
+    }  
+    
+     
+$(document).ready(function () {
+  // Function to fetch user data from the API
+  function fetchUserData() {
+        if (isLoggedIn())  {
+
+            updateMemberInfo(getLoggedInUser())
+                updateAffiliateInfo(getAffiliateSummary())
+
+        } else
+            console.error("User ID not found in local storage.");
+    }
+  
+
+  // Function to update member information in the UI
+  function updateMemberInfo(data) {
+    $(".card-title").text(`Username: ${data.email}`);
+    $(".card-subtitle").text(`Membership Status: ${data.membership_status}`);
+    $("#memberSince").text(`Member Since: ${data.membership_start_date}`);
+    $("#package").text(`Package: ${data.membership_package}`);
+    $("#expires").text(`Expires: ${data.membership_expiry_date || 'Never'}`);
+    $("#renews").text(`Renews On: ${data.membership_renewal_date || '-'}`);
+
+    if (data.membership_status === "TRIAL") {
+      $(".trial").show();
+    } else {
+      $(".trial").hide();
+    }
+  }
+
+  // Function to update affiliate information in the UI
+  function updateAffiliateInfo(data) {
+    $("#earnings").text(`Your Referral Code: ${data.affiliate_info.referral_code}`);
+    // Update other affiliate information similarly...
+  }
+
+
+  // Check if the user is logged in and fetch data if they are
+  if (isLoggedIn()) {
+    fetchUserData();
+  } else {
+    // Handle the case where the user is not logged in (e.g., redirect to login page)
+    window.location.href = "/members-area/signup.html"; // Example redirect
+  }
+});
+
+    </script>
+</body>
+</html>

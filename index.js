@@ -3,6 +3,7 @@ const request = require('request');
 const { parse } = require('node-html-parser');
 const mustacheExpress = require('mustache-express');
 const membership = require('./membership/membership');
+const users = require('./user/membership')
 const cors = require('cors');
 const { type } = require('requests');
 
@@ -270,7 +271,9 @@ app.get('/stream/:type/:tmdbId', (req, res) => {
 
    res.render('meta-player', {type: type,  id: tmdbId})
 })
+
 membership.httpApi(app, '/api/membership');
+users.httpApi(app, '/api/user')
 
 app.listen(port, () => {
   console.log(`Proxy server listening at http://localhost:${port}`);

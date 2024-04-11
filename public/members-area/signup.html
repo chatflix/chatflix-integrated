@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up for Chatflix</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- include jquery from cdn -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- include bootstrap js from cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script type="module" src="js/db.js"></script>
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <img src="images/logo.png" alt="Chatflix logo" class="mx-auto d-block" style="width: 50%; padding: 20px 0;">
+  
+          <h1 class="text-center">Sign up for Chatflix</h1>
+          <!-- Text: Opening Special! Signup now and get 72 hours of Premium streaming for free, no card needed-->
+            <p class="text-center" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Chatflix has over 500,000 movies and TV shows with Absolutely No Ads. Signup now and enjoy 72 hours Free!</p>
+          <form id="signup-form">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" autocomplete="off" autofill="off" class="form-control" id="email" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" autocomplete="off" autofill="off" class="form-control" id="password">
+            </div>
+            <div class="mb-3">
+              <label for="referral-code" class="form-label">Referral code (optional)</label>
+              <input type="text" class="form-control" id="referral-code">
+            </div>
+            <!-- Text: By signing up, you agree to our Terms of Service and Privacy Policy. -->
+            
+            <div class="mb-3">
+
+            <p class="text-center" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">By signing up, you agree to our <a href="terms.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Terms of Service</a> and <a href="privacy.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Privacy Policy</a>.</p>
+            </div>
+  
+            <div id="error-message"></div>
+            <div class="mb-3" style="text-align: center;">
+              <button type="submit" class="btn btn-primary" style="width: 45%; margin-right: 10px;">Sign up</button>
+              <button type="button" class="btn btn-secondary" onclick="window.location.href='https://chatflix.org'" style="width: 45%;">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-center pt-5">
+        Need help? Contact support at <a href="mailto:support@chatflix.org">support@chatflix.org</a>
+      </footer>
+      <script src="js/affiliate.js"></script>
+      <script>
+  function isLoggedIn() {
+    // Example: Check for a token in local storage
+    return localStorage.getItem('userId') !== null;
+  }
+
+  function getLoggedInUser() {
+    return JSON.parse(localStorage.getItem('user'))
+  }
+
+  function login(email, password, callback) {
+    $.get(`/api/user/login?email=${email}&password=${password}`, (user) => {
+      localStorage.setItem('user', JSON.stringify(user.user, null, 2))
+      localStorage.setItem('affliate_info', JSON.stringify(user.affiliate_info, null, 2))
+
+      localStorage.setItem('userId', user.user.id)
+
+      console.log(JSON.stringify(user, null, 2))
+      callback(user)
+    })
+  }
+
+  // Function to fetch user data from the API    
+  function fetchUserData() {
+    const userId = localStorage.getItem('userId'); // Assuming userId is stored upon login
+    if (userId) {
+      $.get(`/api/user/getMemberStatus?userId=${userId}`, function (data) {
+        updateMemberInfo(data);
+      });
+      $.get(`/api/user/affiliateInfo?userId=${userId}`, function (data) {
+        updateAffiliateInfo(data);
+      });
+    } else {
+      console.error("User ID not found in local storage.");
+    }
+  }
+
+  // Function to update member information in the UI
+  function updateMemberInfo(data) {
+    $(".card-title").text(`Username: ${data.user.email}`);
+    $(".card-subtitle").text(`Membership Status: ${data.user.membership_status}`);
+    $(".list-group-item:nth-child(1)").text(`Member Since: ${data.user.membership_start_date}`);
+    $(".list-group-item:nth-child(2)").text(`Package: ${data.user.membership_package}`);
+    $(".list-group-item:nth-child(3)").text(`Expires: ${data.user.membership_expiry_date || 'Never'}`);
+    $(".list-group-item:nth-child(4)").text(`Renews On: ${data.user.membership_renewal_date || '-'}`);
+
+    if (data.user.membership_status === "TRIAL") {
+      $(".trial").show();
+    } else {
+      $(".trial").hide();
+    }
+  }
+
+  // Function to update affiliate information in the UI
+  function updateAffiliateInfo(data) {
+    $("#earnings").text(`Your Referral Code: ${data.affiliate_info.referral_code}`);
+    // Update other affiliate information similarly...
+  }
+
+        $(document).ready(function() {
+          $('#signup-form').submit(async function(event) {
+            event.preventDefault();
+      
+            const email = $('#email').val();
+            const password = $('#password').val();
+            const referralCode = $('#referral-code').val();
+            
+            try {
+
+              
+              $.get(`/api/user/signup?email=${email}&password=${password}&referralCode=${referralCode}`, (newUser) => {
+                login(email, password, (profile) => {location.href='dashboard.html'})
+              })
+            } catch (error) {
+              // Display the error message in red text
+              $('#error-message').text(error.message).css('color', 'red');
+            }
+          });
+        });
+
+    $(document).ready(function() {
+      $("#email").focus();
+      const referralCode = getReferralCodeFromLocalStorage()
+      if (referralCode != '') {
+        $("#referral-code").val(referralCode);
+        $("#referral-code").attr("disabled", true);
+      } else {
+        $("#referral-code").val("LAUNCH2024");
+        $("#referral-code").attr("disabled", false);
+      }
+    });
+
+      </script>
+  </body>
+  </html>

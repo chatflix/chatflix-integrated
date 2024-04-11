@@ -1,0 +1,14 @@
+{
+    "type": "service_account",
+    "project_id": "flixi-selfhost",
+    "private_key_id": "7fe5027f573b0abf2375cf41cd208ca42466951d",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDJgtIx+QIYRfOV\nAeqOlH8wr7H5Em/9kWn7IsKegyrE765Mzkn1dbwQjWiLFiB7jEs57db7OfkzbT2Z\nUkSa9GkaW9LgLFd7AU9aOuPCRnuWqmqD0dUifjCxUBNSP8P1W8y8wkksQl0/jI5k\n3gUdZjicv12QDjcJJB9dfXByVDlbR3lWIod1BhkPB+7NDu8SGP9+I6ahFoSnyoUT\nXNG3hizfb6g4eSfCLwwfr9fdnp3H4iS5aU2zWPZbagZG7Gg+ZVcfVAEFX4z8q5+5\ndRMU4CRbs61R1uoZHvILtzNpmAQBV4bOl+esiEEh+wUsuaphV6AilhwE+H+Rz//2\nAdIX/DLLAgMBAAECggEACKF1m10aTpaeLnI9uzMM5uA0AEJen3QLdPEZBkYBJY5M\nAsg/UiDHEORstXb9F7oCfNGELCyK+69kQ6DnIalx4BS/u15a0mRFsaGW2ZdAOfZg\nsoTEYjs1EFsazvfa+V3nBD5uscUXceVm+QGOBtxhkSEcdH3IQnEGWcWQyhdzuhuK\nEKTKgdFZYbSjNu4x7Em9kRLzxDO9BMLWk/4aS99k3W1BVWRc3lYDDBPrcXsjLmgt\nv7P+dDUnnpyixQO9B++bGXeGdBtRq9Vz741yFjUp00Le2MsKql1pqIisGTxEGgR7\nX3C78OSrR+9WaBeluMMstkd0/wQXRpFgqvgIXWY0YQKBgQDlvmG8TT14rhjbR48o\n3BEm3AaScTou93SYas4V1chCp6gHOMw8SH+s6zPa1b+gfVLRIO9CNH+UU0BFXZON\nEWSh+xoDS5Us1ZYmRCo4GdtoAIHJN8JOUaqUP5pNC3MAYcgyg/hQCnE8nPmY8Gkp\nr/Gt2eGopJsGSFhc5jKSWK1TYQKBgQDgim97qFTTrhgrkotTIWI8Z8HueyCmh5YY\nTIsPOQaCtueq+NKMJUnElV6ei0QboI+v8ZhDoJwE/cSgQen8QZeFzlAJ+GV4ZLxK\nFpMI0OaV1xnNwfBCDLC3BLRHVulSZXI7ApwAKjB1FY46dzyFYLqini0uvnkU3R7B\nAqnHrjYhqwKBgQCIyIfSH76omibsbzd54URI+ZjkGYvFqMj/ch+O+oBHxyAQZK2c\neqGhZ0uxT6/Osq7bGhu5NB59Re+vHN6bj651jlXXfmmrjuLdl5n3WtW5nwumrI8A\nKDlCGHgaxOVMZetWwCHYLc9rgh5NA13pVvqyQlXLHW27GNmbPecAINHZIQKBgQCT\nzu1GJG/6jD7C6Auo5G/rPY3us8Sxes12H2Tm124Ou+JSrMrEkIM30e/gQ+LIoPAV\nLN9DnUU3D+nQaLNjZ7Yb0czkU0xQbVd5GdUeV42Ck38b8A99Gyd0wrb9wxuCLt98\nMuKIRT1yxYbDu9vuHNee1qr9e0rvTgPBoEQs+uQNUwKBgQCjnSWUOORDwVIga/dH\npo+HJ3FeusTQ4Oc7LSwRbKkrhi80iaCax2XQIDP8ycE+yPTW4gI4vFdEY+B/vgff\nTMacaK1Zw2WW2pwZp+skwlB5C46R4Mr2WyPcPG0XAfv1gv1VLYlZo15IjJGSIeZ2\ndwgER54GEGAnO6PDyv5BbjZu7g==\n-----END PRIVATE KEY-----\n",
+    "client_email": "geminis-little-bitch@flixi-selfhost.iam.gserviceaccount.com",
+    "client_id": "110513322130058287333",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/geminis-little-bitch%40flixi-selfhost.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
+  

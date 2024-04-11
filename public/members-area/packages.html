@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Chatflix - Premium Membership Packages</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+     crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+     crossorigin="anonymous">
+  </script>
+
+  <script type="module" src="js/db.js"></script>
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 600px;
+      padding: 30px;
+    }
+
+    .logo {
+      margin: 0 auto;
+      width: 100px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .pricing-table {
+      margin: 0 auto;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="text-center">Upgrade To Premium</h1>
+    <p class="pt-3 pb-3">
+      Stream It All! Our weekly, monthly, and yearly memberships are All-Inclusive and come with unlimited streaming, and Family Sharing.     
+    </p>
+    <h3 class="text-center pb-1">Choose Your Plan</h3>
+    <div class="pricing-table"></div>
+    <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+    <stripe-pricing-table pricing-table-id="prctbl_1OxzcS05nJfGRBF2nzwlsRg0"
+      publishable-key="pk_live_51Oxi1u05nJfGRBF2nHOnNSRm7bof6fFTU9dpYZuIrXRCquVMUaaplIfucphoqy7EJoxqyPd57AIXXqth9MndTCck00c7ggtfft">
+    </stripe-pricing-table>
+  </div>
+
+  <footer class="text-center pt-5">
+    Need help? Contact support at <a href="mailto:support@chatflix.org">support@chatflix.org</a>
+  </footer>
+  <script src="js/affiliate.js"></script>
+
+</body>
+
+</html>
