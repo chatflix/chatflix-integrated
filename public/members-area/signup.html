@@ -45,9 +45,11 @@
             <div class="mb-3">
 
             <p class="text-center" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">By signing up, you agree to our <a href="terms.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Terms of Service</a> and <a href="privacy.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Privacy Policy</a>.</p>
-            </div>
+            <p class="text-center hide" id="error-message" style="display:none; font-size: 0.8rem; font-weight: bold; text-decoration: none;">By signing up, you agree to our <a href="terms.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Terms of Service</a> and <a href="privacy.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Privacy Policy</a>.</p>
   
-            <div id="error-message"></div>
+          
+          </div>
+  
             <div class="mb-3" style="text-align: center;">
               <button type="submit" class="btn btn-primary" style="width: 45%; margin-right: 10px;">Sign up</button>
               <button type="button" class="btn btn-secondary" onclick="window.location.href='https://chatflix.org'" style="width: 45%;">Cancel</button>
@@ -74,7 +76,7 @@
   function login(email, password, callback) {
     $.get(`/api/user/login?email=${email}&password=${password}`, (user) => {
       localStorage.setItem('user', JSON.stringify(user.user, null, 2))
-      localStorage.setItem('affliate_info', JSON.stringify(user.affiliate_info, null, 2))
+      localStorage.setItem('affiliate_info', JSON.stringify(user.affiliate_info, null, 2))
 
       localStorage.setItem('userId', user.user.id)
 
@@ -98,27 +100,6 @@
     }
   }
 
-  // Function to update member information in the UI
-  function updateMemberInfo(data) {
-    $(".card-title").text(`Username: ${data.user.email}`);
-    $(".card-subtitle").text(`Membership Status: ${data.user.membership_status}`);
-    $(".list-group-item:nth-child(1)").text(`Member Since: ${data.user.membership_start_date}`);
-    $(".list-group-item:nth-child(2)").text(`Package: ${data.user.membership_package}`);
-    $(".list-group-item:nth-child(3)").text(`Expires: ${data.user.membership_expiry_date || 'Never'}`);
-    $(".list-group-item:nth-child(4)").text(`Renews On: ${data.user.membership_renewal_date || '-'}`);
-
-    if (data.user.membership_status === "TRIAL") {
-      $(".trial").show();
-    } else {
-      $(".trial").hide();
-    }
-  }
-
-  // Function to update affiliate information in the UI
-  function updateAffiliateInfo(data) {
-    $("#earnings").text(`Your Referral Code: ${data.affiliate_info.referral_code}`);
-    // Update other affiliate information similarly...
-  }
 
         $(document).ready(function() {
           $('#signup-form').submit(async function(event) {
@@ -127,17 +108,13 @@
             const email = $('#email').val();
             const password = $('#password').val();
             const referralCode = $('#referral-code').val();
-            
-            try {
 
-              
-              $.get(`/api/user/signup?email=${email}&password=${password}&referralCode=${referralCode}`, (newUser) => {
-                login(email, password, (profile) => {location.href='dashboard.html'})
+              $.ajax( 
+                {
+                  url: `/api/user/signup?email=${email}&password=${password}&referralCode=${referralCode}`,
+                  success: (result) => {login(email, password, () => {location.href='dashboard.html'})},
+                  error: (err) => { $('#error-message').html('Email already in use... did you want to <a href="login.html">LOG IN</a>?').css('color', 'red').show();}
               })
-            } catch (error) {
-              // Display the error message in red text
-              $('#error-message').text(error.message).css('color', 'red');
-            }
           });
         });
 

@@ -8,6 +8,7 @@ window.addEventListener('load', () => {
     if (referralCode) {
       localStorage.setItem('referralCode', referralCode);
       console.log('Referral code saved:', referralCode);
+      tryTrackClick(referralCode)
     }
   });
   
@@ -38,3 +39,7 @@ window.addEventListener('load', () => {
     return url.toString();
   }
   
+  //pings the counter to update stats for the referring partyh
+  function tryTrackClick(referralId) {
+    $.get("/api/user/record_click/"+referralId, (result) => console.log(JSON.stringify(result)))
+  }

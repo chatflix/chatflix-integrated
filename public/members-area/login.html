@@ -24,9 +24,9 @@
               <label for="password" class="form-label">Password</label>
               <input autocomplete="off" type="password" class="form-control" id="password">
             </div>
-            <div class="mb-3 text-danger" id="error-message">Sorry, wrong password</div>
+            <div class="mb-3 text-danger" style="display:none" id="error-message">Wrong email or password</div>
             <div class="mb-3">
-              <a href="signup.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Need to sign up?</a>
+              <a href="signup.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Sign Up FREE</a>
               <a href="forgot.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Forgot password?</a>
             </div>
             <div class="mb-3">
@@ -62,54 +62,51 @@
     return JSON.parse(localStorage.getItem('affiliate_info'))
   }
 
-  function login(email, password, callback) {
-    $.get(`/api/user/login?email=${email}&password=${password}`, (user) => {
-      localStorage.setItem('user', JSON.stringify(user.user, null, 2))
-      localStorage.setItem('affiliate_info', JSON.stringify(user.affiliate_info, null, 2))
+  function login(email, password, redirectTo, useTop, callback) {
+     $("#error-message").hide()
+      $.ajax( 
+      {
+        url: `/api/user/login?email=${email}&password=${password}`,
+        success: (user)  => {
+          localStorage.setItem('user', JSON.stringify(user.user, null, 2))
+          localStorage.setItem('affiliate_info', JSON.stringify(user.affiliate_info, null, 2))
+          localStorage.setItem('userId', user.user.id)
+          console.log(JSON.stringify(user, null, 2))
 
-      localStorage.setItem('userId', user.user.id)
-
-      console.log(JSON.stringify(user, null, 2))
-      callback(user)
+          if (redirectTo) {
+            if (!useTop)
+                window.location.href=redirectTo
+            else 
+              top.location.href=redirectTo
+          } else {
+              if (!useTop) window.location.reload() 
+              else top.location.reload()
+          }
+        
+          if (callback)
+            callback(user)
+        },
+        error: (err) => { console.log(err), $('#error-message').html('Wrong email or password. <a href="login.html"><b>Forgot Password?</a></a>?').show();}
     })
-  }
+    return false;
 
-  // Function to fetch user data from the API    
-  function fetchUserData() {
-    const userId = localStorage.getItem('userId'); // Assuming userId is stored upon login
-    if (userId) {
-      $.get(`/api/user/getMemberStatus?userId=${userId}`, function (data) {
-        updateMemberInfo(data);
-      });
-      $.get(`/api/user/affiliateInfo?userId=${userId}`, function (data) {
-        updateAffiliateInfo(data);
-      });
-    } else {
-      console.error("User ID not found in local storage.");
+  }
+    
+  function logout(redirectTo, useTop=false) {
+        localStorage.removeItem('user')
+        localStorage.removeItem('userId')
+        localStorage.removeItem('affiliate_info')
+        if (redirectTo) {
+            if (!useTop)
+                window.location.href=redirectTo
+            else 
+            top.location.href=redirectTo
+        } else {
+            if (!useTop) window.location.reload() 
+            else top.location.reload()
+        }
     }
-  }
 
-  // Function to update member information in the UI
-  function updateMemberInfo(data) {
-    $(".card-title").text(`Username: ${data.user.email}`);
-    $(".card-subtitle").text(`Membership Status: ${data.user.membership_status}`);
-    $(".list-group-item:nth-child(1)").text(`Member Since: ${data.user.membership_start_date}`);
-    $(".list-group-item:nth-child(2)").text(`Package: ${data.user.membership_package}`);
-    $(".list-group-item:nth-child(3)").text(`Expires: ${data.user.membership_expiry_date || 'Never'}`);
-    $(".list-group-item:nth-child(4)").text(`Renews On: ${data.user.membership_renewal_date || '-'}`);
-
-    if (data.user.membership_status === "TRIAL") {
-      $(".trial").show();
-    } else {
-      $(".trial").hide();
-    }
-  }
-
-  // Function to update affiliate information in the UI
-  function updateAffiliateInfo(data) {
-    $(".list-group-item:nth-child(1)", "#earnings").text(`Your Referral Code: ${data.affiliate_info.referral_code}`);
-    // Update other affiliate information similarly...
-  }
 
         $(document).ready(function() {
           $('#login-form').submit(async function(event) {
@@ -118,17 +115,10 @@
             const email = $('#email').val();
             const password = $('#password').val();
             
-            try {
-
-              login(email, password, (profile) => {location.href='dashboard.html'})
-              
-
-            } catch (error) {
-              // Display the error message in red text
-              $('#error-message').text(error.message).css('color', 'red');
-            }
-          });
-        });
+            login(email, password, "dashboard.html", false)
+            return false;
+          })
+        })
 
     $(document).ready(function() {
       $("#email").focus();
