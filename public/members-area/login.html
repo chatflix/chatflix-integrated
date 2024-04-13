@@ -49,6 +49,15 @@
 
 
       <script>
+  function getPremiumMembershipStatus(fromServer) {
+    const user = getLoggedInUser()
+    if (!user) return false //must be logged in to have a membership!
+    if (user.membership_status == 'VALID' || user.membership_status == 'TRIAL') {
+      return true
+    } else {
+      return false
+    }
+  }
   function isLoggedIn() {
     // Example: Check for a token in local storage
     return localStorage.getItem('userId') !== null;
@@ -61,7 +70,19 @@
   function getAffiliateSummary() {
     return JSON.parse(localStorage.getItem('affiliate_info'))
   }
-
+  function refreshUserProfile(callback) {
+    if (isLoggedIn()) {
+      const uid = window.localStorage.getItem('userId')
+      $.get('/api/user/getUpdatedMemberProfile?userId='+ uid, (profile) => {
+        localStorage.setItem('user', profile.user)
+        localStorage.setItem('affiliate_info', profile.affiliate_info)
+        console.log(JSON.stringify(profile, null, 2))
+        if (callback) callback(profile)
+      })
+    } else {
+      if (callback) callback(null)
+    }
+  }
   function login(email, password, redirectTo, useTop, callback) {
      $("#error-message").hide()
       $.ajax( 
@@ -109,6 +130,12 @@
 
 
         $(document).ready(function() {
+          if (isLoggedIn()) 
+            location.href="dashboard.html"
+          
+          $('#email').val('')
+          $("#password").val('')
+
           $('#login-form').submit(async function(event) {
             event.preventDefault();
       

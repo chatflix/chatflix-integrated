@@ -112,21 +112,20 @@ function getMembershipDetails(callback) {
     }
   }
   function enforceMembershipForContentPages() {
-    const membershipStatus = getMembershipStatus();
+    const membershipStatus = getPremiumMembershipStatus();
   
-    if (membershipStatus.status === 'valid') {
+    if (membershipStatus) {
       console.log("membership status: valid")
       //todo: set a settings icon in the header to inspect your membership
     } else {
-      if (membershipStatus.freeTrialEligible) {
-        console.log("membership status: free trial eligible")
-        autoFreeTrial()
-      }
-     else {
-            console.log("membership status: paywalled!")
+           
+      
+      
+      
+      console.log("membership status: paywalled!")
               configureInfoButtons();showModal(`
               <div style="background-color:white">
-              <iframe src='/activation_hub.html' frameborder='0' style='width:100%; height: 80vh; margin: 0; border:0; padding: 0; overflow-y: scroll; scrollbar-width: thin;'></iframe>
+              <iframe src='/members-area/dashboard.html' frameborder='0' style='width:100%; height: 80vh; margin: 0; border:0; padding: 0; overflow-y: scroll; scrollbar-width: thin;'></iframe>
               </div> `, false)
 
 
@@ -137,7 +136,7 @@ function getMembershipDetails(callback) {
             
           }
 
-      }
+      
   }
 
    //is expiring soon

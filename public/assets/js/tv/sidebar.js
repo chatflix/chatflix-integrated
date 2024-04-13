@@ -29,19 +29,6 @@ export function sidebar() {
         <p class="title">Genres...</p>
 
       </div>
-      <div class="sidebar-footer">
-        <p class="copyright">WARNING: This website has been condemned by the Motion Picture Association and its greedy attorneys. For educational purposes only.</p>
-        <br/>
-        <img
-          src="/assets/images/sociopathic-hamster.webp"
-          alt="sociopathic hamster"
-          width="130"
-          height="130"
-        />
-        <br />
-        <i>
-          A Sociopathic Hamster production. Made in a warm, sunny developing country.
-      </div>
   `;
 
   const genreLink = function () {

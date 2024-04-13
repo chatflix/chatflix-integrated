@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership Packages</title>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom Style for Dark Mode -->
+<link rel="stylesheet" href="/assets/css/payment.ccss">
+</head>
+<body style="background-color:inherit">
+  <!-- jQuery and Bootstrap Bundle JS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <main>
+    <div style="display:none" class="px-4 py-2 my-4 text-center" id="activate-success">
+      <img class="d-block mx-auto mb-4" src="/assets/images/chatflix-web-small.png" alt="" width="72" height="57">
+      <h1 class="display-5 fw-bold text-body-emphasis">Welcome To Chatflix Premium Edition</h1>
+      <div class="col-lg-6 mx-auto border-primary">
+        <p>Your upgrade has been processed and you can now enjoy over 500,000 ad-free movies and TV episodes on your browser or smart tv</p>
+        <p class="lead mb-4 activation-result"></p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a target="_top" href="/members-area/dashboard.html" class="see-packages btn btn-primary btn-lg px-4 gap-3 mb-2">My Account</a>
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+          <a target="_top" href="/" class="see-packages btn btn-primary btn-lg px-4 gap-3">Start Streaming</a>
+        </div>
+
+      </div>
+    </div>
+
+
+    
+  </main>
+  <script src="js/user.js"></script>
+    <script>
+         const getQueryParams = (name) => {
+            const params = {};
+            window.location.search.slice(1).split('&').forEach(param => {
+              const [key, value] = param.split('=');
+              params[key] = value;
+            });
+            if (name) return params[name]
+            return params;
+          }
+          
+          //short and sweet... we've been given an activation code after successful payment
+          //we can now activate the device, and redirect to the home page
+          $(document).ready(function() { 
+            const urlParams = new URLSearchParams(window.location.search);
+            const price = parseFloat(urlParams.get('price'));
+            const product = urlParams.get('product')
+            const durationInDays = parseInt(urlParams.get('duration'))
+            const isRecurring = true
+            const userId = localStorage.getItem('userId')
+            $.get(`/api/user/addPremiumMembership?userId=${userId}&price=${price}&packageDescription=${product}&durationInDays=${durationInDays}&isRecurring=true`, (result) => {
+              $("#activate-success").show()
+            })
+           
+          })
+
+</script>
+</body>

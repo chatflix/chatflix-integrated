@@ -40,12 +40,14 @@
     window.MOVIE_ID='{{movieId}}'
     window.MOVIE_TITLE='{{movieTitle}}'
     window.STREAM_LOADER_URL='/stream/tv/{{movieId}}'
+    //window.STREAM_LOADER_URL=''
     </script>
 
     <script type="module">
       import {header} from "/assets/js/header.js"
       document.querySelector("header").innerHTML = header("TV")
     </script>
+    <script src="/members-area/js/user.js"></script>
     <script src="/assets/js/membership.js"></script>
 
     <script src="/assets/js/tv/detail.js" type="module"></script>

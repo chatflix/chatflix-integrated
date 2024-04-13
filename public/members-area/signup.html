@@ -102,6 +102,10 @@
 
 
         $(document).ready(function() {
+          if (isLoggedIn()) 
+            location.href="dashboard.html"
+
+
           $('#signup-form').submit(async function(event) {
             event.preventDefault();
       
