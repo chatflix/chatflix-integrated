@@ -49,7 +49,7 @@ export function sidebar() {
     sidebar.appendChild(sidebarInner);
     toggleSidebar(sidebar);
   };
-
+   
   const toggleSidebar = function (sidebar) {
     // Toggle sidebar in Mobile Screen
     const sidebarBtn = document.querySelector("[menu-btn]");

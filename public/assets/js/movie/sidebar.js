@@ -14,7 +14,7 @@ export function sidebar() {
       }
       genreLink();
     }
-  );
+  ); 
 
   const sidebarInner = document.createElement("div");
   sidebarInner.classList.add("sidebar-inner");
