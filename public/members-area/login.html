@@ -15,6 +15,9 @@
           <img src="images/logo.png" alt="Chatflix logo" class="mx-auto d-block" style="width: 50%; padding: 20px 0;">
   
           <h1 class="text-center">Login to Chatflix</h1>
+          <p class="text-center" style="font-size: 0.8rem; text-decoration: none;">Need An Account? <a href="signup.html" style="font-weight:bold; text-decoration:none">SIGN UP</a> and get 3 Days of premium streaming absolutely free!</p>
+
+
           <form id="login-form">
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
@@ -26,8 +29,8 @@
             </div>
             <div class="mb-3 text-danger" style="display:none" id="error-message">Wrong email or password</div>
             <div class="mb-3">
-              <a href="signup.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Sign Up FREE</a>
-              <a href="forgot.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Forgot password?</a>
+
+             <a href="forgot.html" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Forgot password?</a>
             </div>
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary" style="width: 45%; margin-right: 10px;">Login</button>
@@ -46,93 +49,14 @@
   
       
       <script src="js/affiliate.js"></script>
-
+      <script src="js/user.js"></script>
 
       <script>
-  function getPremiumMembershipStatus(fromServer) {
-    const user = getLoggedInUser()
-    if (!user) return false //must be logged in to have a membership!
-    if (user.membership_status == 'VALID' || user.membership_status == 'TRIAL') {
-      return true
-    } else {
-      return false
-    }
-  }
-  function isLoggedIn() {
-    // Example: Check for a token in local storage
-    return localStorage.getItem('userId') !== null;
-  }
-
-  function getLoggedInUser() {
-    return JSON.parse(localStorage.getItem('user'))
-  }
-
-  function getAffiliateSummary() {
-    return JSON.parse(localStorage.getItem('affiliate_info'))
-  }
-  function refreshUserProfile(callback) {
-    if (isLoggedIn()) {
-      const uid = window.localStorage.getItem('userId')
-      $.get('/api/user/getUpdatedMemberProfile?userId='+ uid, (profile) => {
-        localStorage.setItem('user', profile.user)
-        localStorage.setItem('affiliate_info', profile.affiliate_info)
-        console.log(JSON.stringify(profile, null, 2))
-        if (callback) callback(profile)
-      })
-    } else {
-      if (callback) callback(null)
-    }
-  }
-  function login(email, password, redirectTo, useTop, callback) {
-     $("#error-message").hide()
-      $.ajax( 
-      {
-        url: `/api/user/login?email=${email}&password=${password}`,
-        success: (user)  => {
-          localStorage.setItem('user', JSON.stringify(user.user, null, 2))
-          localStorage.setItem('affiliate_info', JSON.stringify(user.affiliate_info, null, 2))
-          localStorage.setItem('userId', user.user.id)
-          console.log(JSON.stringify(user, null, 2))
-
-          if (redirectTo) {
-            if (!useTop)
-                window.location.href=redirectTo
-            else 
-              top.location.href=redirectTo
-          } else {
-              if (!useTop) window.location.reload() 
-              else top.location.reload()
-          }
-        
-          if (callback)
-            callback(user)
-        },
-        error: (err) => { console.log(err), $('#error-message').html('Wrong email or password. <a href="login.html"><b>Forgot Password?</a></a>?').show();}
-    })
-    return false;
-
-  }
-    
-  function logout(redirectTo, useTop=false) {
-        localStorage.removeItem('user')
-        localStorage.removeItem('userId')
-        localStorage.removeItem('affiliate_info')
-        if (redirectTo) {
-            if (!useTop)
-                window.location.href=redirectTo
-            else 
-            top.location.href=redirectTo
-        } else {
-            if (!useTop) window.location.reload() 
-            else top.location.reload()
-        }
-    }
-
 
         $(document).ready(function() {
           if (isLoggedIn()) 
             location.href="dashboard.html"
-          
+
           $('#email').val('')
           $("#password").val('')
 

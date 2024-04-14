@@ -27,7 +27,9 @@
           <h1 class="text-center">Sign up for Chatflix</h1>
           <!-- Text: Opening Special! Signup now and get 72 hours of Premium streaming for free, no card needed-->
             <p class="text-center" style="font-size: 0.8rem; font-weight: bold; text-decoration: none;">Chatflix has over 500,000 movies and TV shows with Absolutely No Ads. Signup now and enjoy 72 hours Free!</p>
-          <form id="signup-form">
+            <p class="text-center" style="font-size: 0.8rem;  text-decoration: none;">Already Have An Account? <a href="login.html" style="text-decoration:none; font-weight:bold">LOG IN</a></p>
+
+            <form id="signup-form">
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
               <input type="email" autocomplete="off" autofill="off" class="form-control" id="email" aria-describedby="emailHelp">
@@ -99,6 +101,35 @@
       console.error("User ID not found in local storage.");
     }
   }
+  function validateForm() {
+  // Get form values
+          const email = $("#email").val();
+          const password = $("#password").val();
+          const referralCode = $("#referral-code").val();
+
+          // Reset error message
+          $("#error-message").html("").hide();
+
+          // Validate email
+          if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+            $("#error-message").html("Please enter a valid email address.").show();
+            return false;
+          }
+
+          // Validate password
+          if (!password || password.length < 8) {
+            $("#error-message").html("Password must be at least 8 characters long.").show();
+            return false;
+          }
+
+          // Validate referral code (optional)
+          if (referralCode) {
+            $("#referral-code").val(referralCode.toUpperCase());
+          }
+
+          // Validation passed
+          return true;
+}
 
 
         $(document).ready(function() {
@@ -108,7 +139,8 @@
 
           $('#signup-form').submit(async function(event) {
             event.preventDefault();
-      
+            if (!validateForm()) return false;
+
             const email = $('#email').val();
             const password = $('#password').val();
             const referralCode = $('#referral-code').val();

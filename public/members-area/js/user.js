@@ -56,7 +56,7 @@ function login(email, password, redirectTo, useTop, callback) {
         if (callback)
           callback(user)
       },
-      error: (err) => { console.log(err), $('#error-message').html('Wrong email or password. <a href="login.html"><b>Forgot Password?</a></a>?').show();}
+      error: (err) => { console.log(err), $('#error-message').html('Wrong email or password... Please try again').show();}
   })
   return false;
 
