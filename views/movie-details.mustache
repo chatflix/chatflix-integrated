@@ -4,22 +4,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="title" content="Watch {{movieTitle}} on Chatflix" />
-    <title></title>
+    <meta name="title" content="Stream {{title}} on Chatflix" />
+    <title>{{title}}</title>
 
     <!-- primary meta tags -->
     <meta
       name="description"
-      content="Watch {{movieTitle}} on Chatflix, the ultimate streaming destination."
+      content="Stream {{title}} on Chatflix, the ultimate streaming destination."
     />
 
 
     <!-- Open Graph tags -->
     <meta property="og:type" content="video.movie" />
-    <meta property="og:title" content="Watch {{movieTitle}} on Chatflix" />
-    <meta property="og:description" content="Stream {{movieTitle}} in HD anywhere in the world with Chatflix.xyz, your streaming destination" />
-    <meta property="og:image" content="/images/chatflix-logo.png" />
-    <meta property="og:url" content="http://chatflix.org/movie/{{movieId}}/{{movieTitle}}?ref=og.share" />
+    <meta property="og:title" content="Stream {{title}} on Chatflix" />
+    <meta property="og:description" content="{{description}}" />
+    <meta property="og:image" content="{{{posterUrl}}}" />
+    <meta property="og:url" content="http://chatflix.org/movie/{{movieId}}/{{titleSlug}}" />
 
 
 
@@ -34,13 +34,21 @@
     />
     <!-- StyleSheet : CSS -->
     <link rel="stylesheet" href="/assets/css/style.css" />
-    <!-- Scripting : JS -->
+ 
+    <!-- Basic utility icons -->
+    <link 
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" 
+      crossorigin="anonymous">
+
     <script src="/assets/js/global.js" defer></script>
 
     <script>
     window.MOVIE_ID='{{movieId}}'
-    window.MOVIE_TITLE='{{movieTitle}}'
+    window.MOVIE_TITLE='{{title}}'
+    window.MOVIE_TITLE_SLUG='{{titleSlug}}'
     window.STREAM_LOADER_URL='/stream/movie/{{movieId}}'
+    window.OG_URL='https://chatflix.org/movie/{{movieId}}/{{titleSlug}}'
 
     </script>
     <script type="module">
@@ -51,6 +59,12 @@
     <script src="/assets/js/membership.js"></script>
 
     <script src="/assets/js/movie/detail.js" type="module"></script>
+
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+  integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+  crossorigin="anonymous"></script>
+
   </head>
   <body>
     <div class="center-body">

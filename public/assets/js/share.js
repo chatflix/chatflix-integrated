@@ -25,15 +25,16 @@ const shareButton = (title, text, url, target_selector,  button_style="icon_with
     let markup = ''
     if (button_style="icon_with_text") {
         markup= `
-        <a href="#" class="internal-share-button">
-            ⮫ Share
+        <a href="#">
+            <i class="fas fa-share"></i> Share
         </a>
         `
     }
 
     $(target_selector).append(markup)
-    $(".internal-share-button").on("click", (e) => {
+    $(".share-button").on("click", (e) => {
         e.preventDefault()
+        //the text share is buggy, so let the OG tags handle it
         navigator.share({title, text, url});
     })
     console.log("[debug] using deep OS integration for sharing")

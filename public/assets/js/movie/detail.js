@@ -100,6 +100,31 @@ fetchDataFromServer(
                 <h1 style="font-size:1.2em">${title}</h1>
                 <div class="detail-content" style="font-size:0.9em">
 
+                  <!-- Sharing Utensils: above the player -->
+                  <div class="meta-list" style="margin: 10px">
+
+                      <div class="meta-item" style=""><div class="share-button"></div></div>
+
+                      <a class="meta-item sharing-utensil" 
+                      href="https://www.facebook.com/sharer/sharer.php?u=${window.OG_URL}"
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <button><i class="fa-brands fa-facebook"></i> Post</button></a>
+                      
+                      <a class="meta-item sharing-utensil"
+                      href="https://twitter.com/intent/tweet?text=Watch ${title}. Now streaming on Chatflix!&url=${window.OG_URL}"
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <button><i class="fa-brands fa-twitter"> </i> Tweet</button></a>
+            
+                      <a class="meta-item sharing-utensil"
+                      href="https://api.whatsapp.com/send?text=${window.OG_URL}"
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <button><i class="fa-brands fa-whatsapp"></i> Send </button></a>
+
+                  </div>
+                  <!-- End Sharing Utensils -->
                   <iframe allowfullscreen referrerpolicy="origin" id="chatflix-multiplex-player" 
                     style="aspect-ratio: 16/9; width: 100%; padding:0; border:0; overflow:hidden" 
                     src='${window.STREAM_LOADER_URL}'></iframe>
@@ -124,8 +149,10 @@ fetchDataFromServer(
 
                     <div class="meta-item">${release_date.split("-")[0]}</div>
                     
+                    <!--
                     <div class="separator" style="padding: 0 3"></div>
                     <div class="meta-item" style=""><div class="share-button"></div></div>
+                    -->
 
                     <p class="overview">${overview}</p>
 
@@ -176,13 +203,16 @@ fetchDataFromServer(
     } */
 
     pageContent.appendChild(movieDetail);
-    shareButton(`${title} | Now Streaming on Chatflix`, 
-        `Watch ${title} for free on Chatflix! Chatflix has over 100,000 movies and TV episodes available for streaming in HD or casting to your TV, anywhere in the world, with no ads. Quite simply, Chatflix is the best streaming platform on this planet and the only streaming platform you will ever need` 
-      , `https://chatflix.org/movie/${movieId}/${movieTitleSlug}?ref=nativeShareButton`,
+
+    shareButton(`Watch ${title}... Now Streaming on Chatflix`, 
+        overview, 
+        window.OG_URL,
       '.share-button');
+
+
       $(".copy-link").on("click", function (event) {
         event.preventDefault()
-        copyTextToClipboard(`https://chatflix.org/movie/${movieId}/${movieTitleSlug}?ref=copyLinkButton`)
+        copyTextToClipboard(`${window.OG_URL}`)
       })
 
 

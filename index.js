@@ -5,7 +5,6 @@ const mustacheExpress = require('mustache-express');
 const membership = require('./membership/membership');
 const users = require('./user/membership')
 const cors = require('cors');
-const { type } = require('requests');
 
 const app = express();
 app.use(cors())
@@ -70,21 +69,64 @@ app.get('/tv', (req, res) => {
   });
 });
 
-app.get('/movie/:movieId/:movieTitle', (req, res) => {
-  const { movieId, movieTitle } = req.params;
+
+// Function to fetch movie/TV show details from TMDb API
+async function fetchTMDbDetails(type, id) {
+  const url = `https://api.themoviedb.org/3/${type}/${id}?api_key=829a43a98259bc44cae297489c7e3bba&append_to_response=images`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+function getTitleSlug(title) {
+  return title
+      .toLowerCase() // Convert to lowercase
+      .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with a hyphen
+      .replace(/^-|-$/g, ''); // Remove leading and trailing hyphens
+}
+
+app.get('/movie/:movieId/:movieTitle', async(req, res) => {
+  const { movieId, titleSlugFromRequest } = req.params;
+  const metadataFromTmdb = {}
+
+  try {
+    const details = await fetchTMDbDetails("movie", movieId);
+    metadataFromTmdb.title = details.title || details.name;
+    metadataFromTmdb.description = details.overview;
+    metadataFromTmdb.posterUrl = `https://image.tmdb.org/t/p/original${details.poster_path}`;
+    metadataFromTmdb.titleSlug = getTitleSlug(metadataFromTmdb.title)
+  } catch (error) {
+    console.error('Unable to get metadata for movie ID '+movieId, error);
+  }
+
+  const {title, description, posterUrl, titleSlug} = metadataFromTmdb
+
   // You can now use movieId and movieTitle to fetch data and render a template
   res.render('movie-details', { // Assuming you have a 'movie.mustache' template
       movieId,
-      movieTitle
+      title, description, posterUrl, titleSlug
   });
 });
 
-app.get('/tv/:movieId/:movieTitle', (req, res) => {
-  const { movieId, movieTitle } = req.params;
-  // Fetch series details using seriesId and seriesTitle
-  res.render('tv-details', { // Assuming you have a 'series.mustache' template
+app.get('/tv/:movieId/:movieTitle', async(req, res) => {
+  const { movieId, titleSlugFromRequest } = req.params;
+  const metadataFromTmdb = {}
+
+  try {
+    const details = await fetchTMDbDetails("tv", movieId);
+    metadataFromTmdb.title = details.title || details.name;
+    metadataFromTmdb.description = details.overview;
+    metadataFromTmdb.posterUrl = `https://image.tmdb.org/t/p/original${details.poster_path}`;
+    metadataFromTmdb.titleSlug = getTitleSlug(metadataFromTmdb.title)
+  } catch (error) {
+    console.error('Unable to get metadata for movie ID '+movieId, error);
+  }
+
+  const {title, description, posterUrl, titleSlug} = metadataFromTmdb
+
+  // You can now use movieId and movieTitle to fetch data and render a template
+  res.render('tv-details', { // Assuming you have a 'movie.mustache' template
       movieId,
-      movieTitle
+      title, description, posterUrl, titleSlug
   });
 });
 
@@ -275,6 +317,36 @@ app.get('/stream/:type/:tmdbId', (req, res) => {
 membership.httpApi(app, '/api/membership');
 users.httpApi(app, '/api/user')
 
+// Middleware to detect bots and render OG tags
+// app.use(async (req, res, next) => {
+//   const userAgent = req.headers['user-agent'];
+//   const isBot = /facebookexternalhit|Twitterbot|LinkedInBot|Googlebot/i.test(userAgent);
+
+//   if (isBot && (req.path.startsWith('/movie/') || req.path.startsWith('/tv/'))) {
+//     const parts = req.path.split('/');
+//     const type = parts[1];
+//     const id = parts[2];
+
+//     try {
+//       const details = await fetchTMDbDetails(type, id);
+//       const title = details.title || details.name;
+//       const description = details.overview;
+//       const posterUrl = `https://image.tmdb.org/t/p/original${details.poster_path}`;
+
+//       res.render('og-tags', { // Assuming you have a 'og-tags.mustache' template
+//         title,
+//         description,
+//         posterUrl,
+//         url: `https://chatflix.org${req.path}` // Replace with your actual domain
+//       });
+//     } catch (error) {
+//       console.error('Error fetching TMDb details:', error);
+//       next(); // Continue to the next middleware/route handler
+//     }
+//   } else {
+//     next();
+//   }
+// });
 app.listen(port, () => {
   console.log(`Proxy server listening at http://localhost:${port}`);
 });

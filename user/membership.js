@@ -1,7 +1,7 @@
 const express = require('express');
 const { Pool } = require('pg');
 const crypto = require('crypto');
-
+const {sendEmail} = require('./email-sender')
 const app = express();
 app.use(express.json());
 
@@ -236,6 +236,8 @@ const httpApi=(app, endpointBase='/api/user') => {
         const result = await recordAffiliateSignup(referralCode)
         console.log("referral counter update success: "+result)
       }
+
+      //sendEmail('noreply@flixi.org', email, "Welcome to Chatflix!", "Congrats. You've just signed up for the only streaming service you'll ever need. With over 500,000 Movies, TV Series, and more, Chatflix has more content for less money than any other provider.","<p>Congrats. You've just signed up for the only streaming service you'll ever need. With over 500,000 Movies, TV Series, and more, Chatflix has more content for less money than any other provider.</p>" )
       res.json(profile);
     } catch (error) {
       res.status(500).json({ error: error.message });

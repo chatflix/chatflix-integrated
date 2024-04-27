@@ -1049,7 +1049,7 @@ body {
 
 /* Unicode share button. The .share-button container should be an empty div immediately before the video player on the details page
    the a tag gets auto generated and injected into the share-button div at a later time in the loading process */
-.share-button a, .copy-link-button a {
+.share-button a, .copy-link-button a, .sharing-utensil a, .sharing-utensil, .sharing-utensil button {
   font-weight: 500 !important;
   color: var(--cta-primary) !important;
   text-decoration: none;

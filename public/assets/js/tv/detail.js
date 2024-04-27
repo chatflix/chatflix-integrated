@@ -72,7 +72,32 @@ fetchDataFromServer(
 
                 <div class="detail-box">
                 <h1>${name}</h1>
-                <div class="detail-content">
+                <div class="detail-content" style="font-size:0.9em">
+                <!-- Sharing Utensils: above the player -->
+                <div class="meta-list" style="margin: 10px">
+
+                    <div class="meta-item" style=""><div class="share-button"></div></div>
+
+                    <a class="meta-item sharing-utensil" 
+                    href="https://www.facebook.com/sharer/sharer.php?u=${window.OG_URL}"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <button><i class="fa-brands fa-facebook"></i> Post</button></a>
+                    
+                    <a class="meta-item sharing-utensil"
+                    href="https://twitter.com/intent/tweet?text=Watch ${title}. Now streaming on Chatflix!&url=${window.OG_URL}"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <button><i class="fa-brands fa-twitter"> </i> Tweet</button></a>
+          
+                    <a class="meta-item sharing-utensil"
+                    href="https://api.whatsapp.com/send?text=${window.OG_URL}"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    <button><i class="fa-brands fa-whatsapp"></i> Send </button></a>
+
+                </div>
+                <!-- End Sharing Utensils -->
 
                   <iframe allowfullscreen referrerpolicy="origin" id="chatflix-multiplex-player" 
                   style="aspect-ratio: 16/9; width: 100%; padding:0; border:0; overflow:hidden" 
@@ -135,9 +160,9 @@ fetchDataFromServer(
     } */
 
     pageContent.appendChild(movieDetail);
-    shareButton(`${name}`, 
-        `Stream every season of ${name} on Chatflix, the best streaming platform on this planet. 
-        With over 450,000 HD movies and TV episodes, Chatflix has something for everyone.`,
+    shareButton(`Watch ${title}... Now Streaming on Chatflix`, 
+        overview, 
+        window.OG_URL,
       '.share-button');
       
       $(".copy-link").on("click", function (event) {
