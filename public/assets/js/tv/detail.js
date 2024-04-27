@@ -85,7 +85,7 @@ fetchDataFromServer(
                     <button><i class="fa-brands fa-facebook"></i> Post</button></a>
                     
                     <a class="meta-item sharing-utensil"
-                    href="https://twitter.com/intent/tweet?text=Watch ${title}. Now streaming on Chatflix!&url=${window.OG_URL}"
+                    href="https://twitter.com/intent/tweet?text=Watch ${name}. Now streaming on Chatflix!&url=${window.OG_URL}"
                     target="_blank"
                     rel="noopener noreferrer">
                     <button><i class="fa-brands fa-twitter"> </i> Tweet</button></a>
@@ -160,7 +160,7 @@ fetchDataFromServer(
     } */
 
     pageContent.appendChild(movieDetail);
-    shareButton(`Watch ${title}... Now Streaming on Chatflix`, 
+    shareButton(`Watch ${name}... Now Streaming on Chatflix`, 
         overview, 
         window.OG_URL,
       '.share-button');
