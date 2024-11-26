@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "cd app/api/chat/external_tools && pip install ddg_search",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
